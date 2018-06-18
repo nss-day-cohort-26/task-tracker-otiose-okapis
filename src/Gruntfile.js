@@ -21,15 +21,13 @@ module.exports = function (grunt) {
             //   banner: "/*! <%= pkg.name %> <%= grunt.template.today(yyyy-mm-dd) %> */"
             },
             build: {
-              files: [
-                {
-                  expand: true,
-                  cwd: "../dist",
-                  src: "bundle.js",
-                  dest: "../dist",
-                  ext: ".min.js"
-                }
-              ]
+                files: [{
+                    expand: true,
+                    cwd: "../dist",
+                    src: "bundle.js",
+                    dest: "../dist",
+                    ext: ".min.js"
+                }]
             }
         },
         eslint: {
@@ -53,13 +51,23 @@ module.exports = function (grunt) {
         },
         copy: {
             main: {
-              files: [
-                // includes files within path
-                {expand: true, src: ["index.html"], dest: "../dist", filter: "isFile"},
-                {expand: true, src: ["styles/*.css"], dest: "../dist/", filter: "isFile"},
-              ],
+                files: [
+                    // includes files within path
+                    {
+                        expand: true,
+                        src: ["index.html"],
+                        dest: "../dist",
+                        filter: "isFile"
+                    },
+                    {
+                        expand: true,
+                        src: ["styles/*.css"],
+                        dest: "../dist/",
+                        filter: "isFile"
+                    },
+                ],
             },
-          },
+        },
     });
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks("grunt-contrib-watch");

@@ -13,6 +13,7 @@ const manager = {
         const card = new Task(taskName, description, dueDate, category);
 
 
+
         /////////    Set Dom Card Element
         const column = document.querySelector(".to-do");
         console.log("test");
@@ -37,6 +38,7 @@ const manager = {
 
         this.database[taskName] = card; // flag for weirdness
         return card;
+
 
 
     },
@@ -66,6 +68,7 @@ const manager = {
 };
 
 // manager.createTask("test", "testing", "someday", "none");
+
 // console.log(manager.database);
 // manager.save();
 // manager.createTask("test222", "testing32", "someday32", "none23");
@@ -81,3 +84,4 @@ const manager = {
 // console.log(manager.database);
 
 module.exports = manager
+
