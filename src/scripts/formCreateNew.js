@@ -82,8 +82,11 @@ btn.onclick = function() {
 }
 
 const createNewTask = () => {
-    manager.createTask(inputDivs.name.value, inputDivs.description.value, inputDivs.dueDate.value, inputDivs.category.value);
-    manager.save
+    const ins = document.querySelectorAll("input");
+    console.log(ins);
+    event.preventDefault();
+    manager.createTask(ins[0].value, ins[1].value, ins[2].value, ins[3].value);
+    manager.save();
 };
 
 submitButton.addEventListener("click", createNewTask);
