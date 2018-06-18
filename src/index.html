@@ -2,20 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Nashville Software School</title>
+  <title>Task Tracker</title>
   <link rel="stylesheet" href="./styles/main.css">
   <link rel="stylesheet" href="./styles/formCreateNew.css"
 </head>
 <body>
-  <nav></nav>
-  <header></header>
-  <article>
-    <header></header>
-    <section></section>
-    <footer></footer>
-  </article>
-  <footer></footer>
-  <input type="submit" value="Click for newTask Modal" id="create-task-button">
+    <div id="page-container">
+    <h1 id="heading">Task Tracker</h1>
+    <h3 id="create-task-button">Create New Task</h3>
+    <section class="grid-wrapper">
+      <div class="to-do box"><h2>To Do:</h2><div class="border-line"></div>
+        <div class="task-card"></div>
+        <div class="task-card"></div>
+        <div class="task-card"></div>
+    </div>
+      <div class="doing box"><h2>Doing:</h2><div class="border-line"></div>
+              <div class="task-card"></div>
+              <div class="task-card"></div>
+              <div class="task-card"></div><div class="task-card"></div>
+              <div class="task-card"></div>
+              <div class="task-card"></div>
+      </div>
+      <div class="done box"><h2>Done:</h2><div class="border-line"></div>
+      </div>
+    </section>
+  </div>
   <script src="./bundle.js"></script>
 </body>
 </html>
