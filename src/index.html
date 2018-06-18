@@ -6,12 +6,26 @@
   <link rel="stylesheet" href="./styles/main.css">
 </head>
 <body>
-    <h1>Task Tracker</h1>
+    <div id="page-container">
+    <h1 id="heading">Task Tracker</h1>
+    <h3 id="create-task-button">Create New Task</h3>
     <section class="grid-wrapper">
-      <div class="to-do box"></div>
-      <div class="doing box"></div>
-      <div class="done box"></div>
+      <div class="to-do box"><h2>To Do:</h2><div class="border-line"></div>
+        <div class="task-card"></div>
+        <div class="task-card"></div>
+        <div class="task-card"></div>
+    </div>
+      <div class="doing box"><h2>Doing:</h2><div class="border-line"></div>
+              <div class="task-card"></div>
+              <div class="task-card"></div>
+              <div class="task-card"></div><div class="task-card"></div>
+              <div class="task-card"></div>
+              <div class="task-card"></div>
+      </div>
+      <div class="done box"><h2>Done:</h2><div class="border-line"></div>
+      </div>
     </section>
+  </div>
   <script src="./bundle.js"></script>
 </body>
 </html>

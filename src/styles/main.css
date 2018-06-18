@@ -3,14 +3,99 @@
     margin: 0;
 }
 
+body {
+    background-color: rgba(176, 194, 229, 1);
+    font-size: 20px;
+}
+
+/*--------------------------------------------------############# Class Styles #############--------------------------------------------------*/
+
 .grid-wrapper {
+    margin: 20px;
     display: grid;
-    grid-template-columns: 23vw 23vw 23vw;
+    grid-template-columns: 25vw 25vw 25vw;
     grid-gap: 5vw;
     background-color: rgba(176, 194, 229, 1);
 }
 
+.task-card {
+    width: 90%;
+    height: 300px;
+    overflow: hidden;
+    background-color: white;
+    margin-top: 30px;
+    cursor: move;
+    border-radius: 15px;
+    box-shadow: 4px 5px 5px black;
+}
+
+.task-card:hover {
+    z-index: 1;
+    height: 600px;
+}
+
 .box {
     background-color: rgba(40, 44, 52, .6);
-    height: 500px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    box-shadow: 6px 8px 8px rgba(77, 77, 77, 1);
+}
+
+.box h2 {
+    text-shadow: 4px 4px 6px black;
+    font-size: 2.5rem;
+}
+
+.border-line {
+    border-bottom: 2px solid white;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/*--------------------------------------------------############# ID Styles #############--------------------------------------------------*/
+
+#page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#heading {
+    font-size: 4em;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 1px 2px 2px grey;
+    margin-bottom: 40px;
+}
+
+#create-task-button {
+    background-color: rgb(255, 149, 149);
+    color: white;
+    width: 20%;
+    height: 50px;
+    text-align: center;
+    padding: 10px;
+    overflow: hidden;
+    border: .5 solid grey;
+    transistion: .8s;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+#create-task-button:hover {
+    /* text-shadow: 2px 2px 5px black; */
+    box-shadow: 0 1px 2px grey;
+    background-color: rgb(255, 115, 115);
+}
+
+#create-task-button:active {
+    /* background-color: rgb(245, 35, 63); */
+    box-shadow: inset 0 2.5px 11px black;
+    text-shadow: 2.5px 2.5px 4px black;
+    border: none;
 }
