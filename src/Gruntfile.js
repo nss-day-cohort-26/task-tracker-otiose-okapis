@@ -17,10 +17,10 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
-            options: {
-              banner:
-                "/*! <%= pkg.name %> <%= grunt.template.today(yyyy-mm-dd) %> */"
-            },
+            // options: {
+            //   banner:
+            //     "/*! <%= pkg.name %> <%= grunt.template.today(yyyy-mm-dd) %> */"
+            // },
             build: {
               files: [
                 {
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-eslint");
     grunt.loadNpmTasks("grunt-browserify");
     grunt.loadNpmTasks("grunt-contrib-copy");
-    grunt.loadNpmTasks("grunt-config-uglify-es")
+    grunt.loadNpmTasks("grunt-contrib-uglify-es")
     // Default task(s).
     grunt.registerTask("default", ["eslint", "browserify", "copy", "uglify", "watch"]);
 };

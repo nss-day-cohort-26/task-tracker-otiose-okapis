@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 23vw 23vw 23vw;
+    grid-gap: 5vw;
+    background-color: rgba(176, 194, 229, 1);
+}
+
+.box {
+    background-color: rgba(40, 44, 52, .6);
+    height: 500px;
+}
