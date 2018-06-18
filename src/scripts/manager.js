@@ -28,7 +28,9 @@ const manager = {
     setStorage: () => {setStorage("localDB",manager.database)}
 };
 
-manager.createTask("test", "testing", "someday", "none");
-manager.createTask("test2", "testing3", "someday4", "none");
-manager.setStorage()
-console.log(manager.database);
+// manager.createTask("test", "testing", "someday", "none");
+// manager.createTask("test2", "testing3", "someday4", "none");
+// manager.setStorage()
+// console.log(manager.database);
+
+module.exports = manager
