@@ -1,38 +1,88 @@
+#modal-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 2; /* Sit on top */
     left: auto;
-    top: auto;
+    top: 40px;
     width: auto; /* Full width */
     height: auto; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    margin: 5% auto;
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+    margin: 4% auto;
+    align-self: center;
+    border-radius: 10px;
+}
+
+.modal > h1 {
+    color: white;
+    padding: 10px;
+    font-weight: normal;
+    text-align: center;
 }
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    /* background-color: #fefefe; */
+    color: white;
+    margin: 20px; auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 800px; /* Could be more or less, depending on screen size */
+    height: auto;
 }
 
 /* The Close Button */
 .close {
+    /* float: right; */
+    width: 300px;
+    text-align: center;
     color: #aaa;
-    float: right;
+    margin-right: 50px;
     font-size: 28px;
-    font-weight: bold;
+    /* font-weight: bold; */
+    padding: 5px;
+    border: 1px solid rgb(255, 149, 149);
+    border-radius: 10px;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: red;
     text-decoration: none;
     cursor: pointer;
+}
+
+.modal-content input {
+    height: 40px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.modal-content #descriptionInput {
+    height: 80px;
+}
+
+.modal-content span{
+    font-size: 1.2em
+}
+
+button {
+    font-size: 1.4em;
+    background-color: rgb(255, 149, 149);
+    color: white;
+    border-radius: 5px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
 }

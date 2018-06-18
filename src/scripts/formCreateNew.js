@@ -15,13 +15,13 @@ taskFormContent.id="taskFormContent";
 taskFormContent.className="modal-content";
 // add close btn to div
 
-const closeSpan = document.createElement("span");
+const closeSpan = document.createElement("H4");
 closeSpan.id="closeSpan";
-closeSpan.className="close";
+closeSpan.className="close clearfix";
 closeSpan.onclick = function() {
     modal.style.display = "none";
 }
-closeSpan.textContent = "X";
+closeSpan.textContent = "Close Window";
 
 //closing events
 // When the user clicks on <span> (x), close the modal
@@ -38,7 +38,7 @@ window.onclick = function(event) {
 //add form content to form div
 
 const testHeader = document.createElement("h1");
-testHeader.textContent = "this is test content of h1";
+testHeader.textContent = "Please enter task details";
 
 const inputsDocForm = document.createElement("form");
 
@@ -125,7 +125,7 @@ const createNewTask = () => {
     }
 
     const card = manager.createTask(inputs.name, inputs.description, inputs.dueDate);
-    manager.save
+    manager.Save()
 
     // for (let input in inputs) {
     //     switch (input) {
