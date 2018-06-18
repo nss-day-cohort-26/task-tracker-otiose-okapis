@@ -23,6 +23,7 @@ body {
     height: 300px;
     overflow: hidden;
     background-color: white;
+    color: black;
     margin-top: 30px;
     cursor: move;
     border-radius: 15px;
