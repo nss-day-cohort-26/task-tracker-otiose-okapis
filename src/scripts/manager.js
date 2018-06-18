@@ -3,6 +3,7 @@ const Load = require("./queryStorage");
 const Save = require("./setStorage");
 console.log(Save);
 
+
 const manager = {
     database: {
         categories: [],
@@ -64,7 +65,7 @@ const manager = {
     }
 };
 
-manager.createTask("test", "testing", "someday", "none");
+// manager.createTask("test", "testing", "someday", "none");
 // console.log(manager.database);
 // manager.save();
 // manager.createTask("test222", "testing32", "someday32", "none23");
@@ -72,3 +73,11 @@ manager.createTask("test", "testing", "someday", "none");
 // manager.load();
 // console.log("final", manager.database);
 
+
+
+// manager.createTask("test", "testing", "someday", "none");
+// manager.createTask("test2", "testing3", "someday4", "none");
+// manager.setStorage()
+// console.log(manager.database);
+
+module.exports = manager
