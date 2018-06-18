@@ -18,8 +18,12 @@ module.exports = function (grunt) {
         },
         uglify: {
             options: {
+<<<<<<< HEAD
             //   banner:
             //     "/*! <%= pkg.name %> <%= grunt.template.today(yyyy-mm-dd) %> */"
+=======
+            //   banner: "/*! <%= pkg.name %> <%= grunt.template.today(yyyy-mm-dd) %> */"
+>>>>>>> 4e3a84c54f73233b66b88f1d5f529dc54dd0858a
             },
             build: {
               files: [
