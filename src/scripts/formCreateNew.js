@@ -1,4 +1,6 @@
 const moment = require("../node_modules/moment");
+const manager = require("./manager");
+
 
 
 //create form div
@@ -106,7 +108,7 @@ newTaskForm.appendChild(closeSpan);
 newTaskForm.appendChild(taskFormContent);
 
 
-document.body.appendChild(newTaskForm);
+document.getElementById("modal-form").appendChild(newTaskForm);
 
 const btn = document.getElementById("create-task-button");
 
@@ -122,21 +124,22 @@ const createNewTask = () => {
         location: locationInput.value
     }
 
-    
+    manager.createTask(inputs.name, inputs.description, inputs.dueDate);
 
-    for (let input in inputs) {
-        switch (input) {
-            case (location || name || description): if (inputs[input] === "") {
-                alert("please complete all fields");
-            }
-                break;
-            case dueDate: if (!moment(inputs[input],"YYYY-MM-DD",true).isValid())
-                alert("please enter a valid date in 'YYYY-MM-DD' format")
-                break;
-            default:
-                break;
-        }
-    }
+
+    // for (let input in inputs) {
+    //     switch (input) {
+    //         case (location || name || description): if (inputs[input] === "") {
+    //             alert("please complete all fields");
+    //         }
+    //             break;
+    //         case dueDate: if (!moment(inputs[input],"YYYY-MM-DD",true).isValid())
+    //             alert("please enter a valid date in 'YYYY-MM-DD' format")
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 };
 
 // for (let input in inputs) {

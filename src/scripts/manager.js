@@ -9,6 +9,7 @@ const manager = {
     createTask: function (taskName, description, dueDate, category = "") {
         const card = new Task(taskName, description, dueDate, category);
         this.database[taskName] = card;
+        return card;
     },
     createNewCategory: function (category) {
         let exists = false;
@@ -26,5 +27,7 @@ const manager = {
     }
 };
 
-manager.createTask("test", "testing", "someday", "none");
-console.log(manager.database);
+// manager.createTask("test", "testing", "someday", "none");
+// console.log(manager.database);
+
+module.exports = manager;
