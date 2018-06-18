@@ -1,4 +1,5 @@
 const Task = require("./task");
+const setStorage = require("./setStorage")
 
 
 const manager = {
@@ -24,7 +25,8 @@ const manager = {
         else {
             alert("There is a problem");
         }
-    }
+    },
+    setStorage: () => {setStorage("localDB",manager.database)}
 };
 
 // manager.createTask("test", "testing", "someday", "none");
