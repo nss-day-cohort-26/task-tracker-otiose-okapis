@@ -1,12 +1,12 @@
 //function to retreive data from local storage
-const getDatabase = () => {
-    const localContactDB = localStorage.getItem("contactsDB")
+const getDatabase = (dataBaseName) => {
+    const localContactDB = localStorage.getItem(dataBaseName)
     if (localContactDB === null) {
         const contactsDB = []
         return contactsDB
     }
     else {
-        let existingDB = localStorage.getItem("contactsDB")
+        let existingDB = localStorage.getItem(dataBaseName)
         existingDB = JSON.parse(existingDB)
         return existingDB
     }
