@@ -124,8 +124,8 @@ const createNewTask = () => {
         location: locationInput.value
     }
 
-    manager.createTask(inputs.name, inputs.description, inputs.dueDate);
-
+    const card = manager.createTask(inputs.name, inputs.description, inputs.dueDate);
+    manager.save
 
     // for (let input in inputs) {
     //     switch (input) {
