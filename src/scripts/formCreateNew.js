@@ -1,56 +1,160 @@
+const moment = require("../node_modules/moment");
 
 
-// Get the button that opens the modal
-var btn = document.getElementById("newTaskBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementById("closeSpan")[0];
-
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
-    newTaskForm.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-
-
-// When the user clicks anywhere outside of the modal, close it
-
-
-
+//create form div
 
 const newTaskForm = document.createElement("div");
-newTaskForm.id="newClassForm";
-newTaskForm.class="modal";
+newTaskForm.id="newTaskForm";
+newTaskForm.className="modal";
+newTaskForm.style.display="none";
+
+const taskFormContent = document.createElement("div");
+taskFormContent.id="taskFormContent";
+taskFormContent.className="modal-content";
+// add close btn to div
 
 const closeSpan = document.createElement("span");
 closeSpan.id="closeSpan";
-closeSpan.class="close";
+closeSpan.className="close";
 closeSpan.onclick = function() {
     modal.style.display = "none";
 }
-closeSpan.innerHTML = "&timesl;"
+closeSpan.textContent = "X";
 
-
-const testHeader = document.createElement("h1");
-testHeader.textContent = "this is test content of h1";
-
+//closing events
+// When the user clicks on <span> (x), close the modal
+closeSpan.onclick = function() {
+    newTaskForm.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target === newTaskForm) {
         modal.style.display = "none";
     }
 }
 
-closeSpan.onclick = function() {
-    newTaskForm.style.display = "none";
-}
+//add form content to form div
 
-window.onclick = function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-}
+const testHeader = document.createElement("h1");
+testHeader.textContent = "this is test content of h1";
 
-newTaskForm.appendChild(closeSpan);
+const inputsDocForm = document.createElement("form");
+
+
+const nameDiv = document.createElement("div");
+const nameLabel = document.createElement("span");
+nameLabel.id = "nameLabel"
+nameLabel.textContent = "Task Name: "
+const nameInput = document.createElement("input");
+nameInput.id = "nameInput";
+nameDiv.appendChild(nameLabel);
+nameDiv.appendChild(nameInput);
+
+const descriptionDiv = document.createElement("div");
+const descriptionLabel = document.createElement("span");
+descriptionLabel.id = "descriptionLabel"
+descriptionLabel.textContent = "Task Description: "
+const descriptionInput = document.createElement("input");
+descriptionInput.id = "descriptionInput";
+descriptionDiv.appendChild(descriptionLabel);
+descriptionDiv.appendChild(descriptionInput);
+
+const dueDateDiv = document.createElement("div");
+const dueDateLabel = document.createElement("span");
+dueDateLabel.id = "dueDateLabel"
+dueDateLabel.textContent = "Task dueDate: "
+const dueDateInput = document.createElement("input");
+dueDateInput.id = "dueDateInput";
+dueDateDiv.appendChild(dueDateLabel);
+dueDateDiv.appendChild(dueDateInput);
+
+const categoryInput = document.createElement("input");
+const categoryInputDiv = document.createElement("div");
+const categoryInputLabel = document.createElement("span");
+categoryInputLabel.id = "categoryInputLabel"
+categoryInputLabel.textContent = "Task categoryInput: "
+const categoryInputInput = document.createElement("input");
+categoryInputInput.id = "categoryInput";
+categoryInputDiv.appendChild(categoryInputLabel);
+categoryInputDiv.appendChild(categoryInputInput);
+
+const locationDiv = document.createElement("div");
+const locationLabel = document.createElement("span");
+locationLabel.id = "locationLabel"
+locationLabel.textContent = "Task location: "
+const locationInput = document.createElement("input");
+locationInput.id = "locationInput";
+locationDiv.appendChild(locationLabel);
+locationDiv.appendChild(locationInput);
+
+const submitButton = document.createElement("button");
+submitButton.textContent = "Submit";
+
+
+
+inputsDocForm.appendChild(nameDiv);
+inputsDocForm.appendChild(descriptionDiv);
+inputsDocForm.appendChild(dueDateDiv);
+inputsDocForm.appendChild(categoryInputDiv);
+inputsDocForm.appendChild(locationDiv);
+inputsDocForm.appendChild(submitButton);
+
+taskFormContent.appendChild(inputsDocForm);
+
 newTaskForm.appendChild(testHeader);
+newTaskForm.appendChild(closeSpan);
+newTaskForm.appendChild(taskFormContent);
+
+
+document.body.appendChild(newTaskForm);
+
+const btn = document.getElementById("create-task-button");
+
+btn.onclick = function() {
+    newTaskForm.style.display = "block";
+}
+
+const createNewTask = () => {
+    const inputs = { name: nameInput.value,
+        description: descriptionInput.value,
+        dueDate: dueDateInput.value,
+        category: categoryInput.value,
+        location: locationInput.value
+    }
+
+    
+
+    for (let input in inputs) {
+        switch (input) {
+            case (location || name || description): if (inputs[input] === "") {
+                alert("please complete all fields");
+            }
+                break;
+            case dueDate: if (!moment(inputs[input],"YYYY-MM-DD",true).isValid())
+                alert("please enter a valid date in 'YYYY-MM-DD' format")
+                break;
+            default:
+                break;
+        }
+    }
+};
+
+// for (let input in inputs) {
+//     if (inputs[input] === "") {
+//         alert("please fill out all fields");
+//         break;
+//     }
+// }
+
+
+submitButton.addEventListener("click", createNewTask);
+// set storage
+
+
+
+
+
+
+
+
 

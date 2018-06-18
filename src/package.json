@@ -15,5 +15,8 @@
     "grunt-contrib-uglify-es": "^3.3.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-eslint": "^20.2.0"
+  },
+  "dependencies": {
+    "moment": "^2.22.2"
   }
 }
