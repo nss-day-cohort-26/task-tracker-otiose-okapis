@@ -7,3 +7,6 @@ obj
 *.db
 *.sqlite3
 .vscode
+node_modules
+.DS_Store
+dist
