@@ -11,8 +11,6 @@ const buildElement = (type, id, className, display) => {
     return element;
 }
 
-
-
 //create form div
 
 const taskForm = buildElement("div","taskForm","modal","none");
@@ -43,11 +41,14 @@ const inputsForm = document.createElement("form");
 
 const createInputDiv = (itemName) => {
     const newDiv = document.createElement("div");
+    newDiv.className = "inputDiv";
     const label = document.createElement("span");
     label.id = (itemName + "Label");
     label.textContent = ("Task " + itemName + ":");
+    label.className = "label";
     const input = document.createElement("input");
     input.id = (itemName + "Input");
+    input.className = "input";
     newDiv.appendChild(label);
     newDiv.appendChild(input);
     return newDiv;
