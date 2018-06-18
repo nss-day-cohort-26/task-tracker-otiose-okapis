@@ -82,7 +82,7 @@ btn.onclick = function() {
 }
 
 const createNewTask = () => {
-    manager.createTask(inputDivs.name.value, inputDivs.description.value, inputDivs.dueDate.value, inputDivs.category.value);
+    manager.createTask(inputDivs.name.querySelector("input").value, inputDivs.description.querySelector("input").value, inputDivs.dueDate.querySelector("input").value, inputDivs.category.querySelector("input").value);
     manager.save
 };
 
