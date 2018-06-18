@@ -5,8 +5,10 @@ class Task {
         this.due = date;
         this.category = category;
         this.location = "toDo"
-        Object.defineProperty(this, 'category', {enumerable: false});
+        Object.defineProperty(this, "category", {enumerable: false});
 
     }
 
 }
+
+module.exports = Task;
