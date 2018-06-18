@@ -87,6 +87,7 @@ const createNewTask = () => {
     event.preventDefault();
     manager.createTask(ins[0].value, ins[1].value, ins[2].value, ins[3].value);
     manager.save();
+
 };
 
 submitButton.addEventListener("click", createNewTask);
