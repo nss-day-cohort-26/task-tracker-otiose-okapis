@@ -103,6 +103,9 @@ const createInputDiv = (itemName, itemPrintName) => {
         newDiv.appendChild(label);
         newDiv.appendChild(input);
     } else if (itemName === "category") {
+
+        const newCategoryDiv = document.createElement("div");
+        newCategoryDiv.id = "newCategoryDiv";
         const select = document.createElement("select");
         select.id = (itemName + "Input");
         select.className = "input";
@@ -119,10 +122,12 @@ const createInputDiv = (itemName, itemPrintName) => {
         const newCategoryInput = document.createElement("input");
         newCategoryInput.id = "newCategoryInput";
 
+        newCategoryDiv.appendChild(select);
+        newCategoryDiv.appendChild(newCategoryButton);
+        newCategoryDiv.appendChild(newCategoryInput);
+
         newDiv.appendChild(label);
-        newDiv.appendChild(select);
-        newDiv.appendChild(newCategoryButton);
-        newDiv.appendChild(newCategoryInput);
+        newDiv.appendChild(newCategoryDiv);
 
     }
     return newDiv;
