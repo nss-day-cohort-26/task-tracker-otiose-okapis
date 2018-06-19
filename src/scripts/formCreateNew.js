@@ -64,7 +64,7 @@ const createInputDiv = (itemName, itemPrintName) => {
     newDiv.appendChild(label);
     newDiv.appendChild(input);
     if (itemName === "dueDate"){
-        input.setAttribute("type", "date");
+        input.setAttribute("type", "datetime-local");
     }
     return newDiv;
 };

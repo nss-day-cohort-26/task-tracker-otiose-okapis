@@ -6,7 +6,31 @@ console.log(Save);
 
 const manager = {
     database: {
+        tasks: {},
         categories: [],
+    },
+
+    placeTask: function(card){
+        const column = document.querySelector(`.${card.location}`);
+        const cardDiv = document.createElement("div");
+        cardDiv.setAttribute("draggable", true)
+        cardDiv.setAttribute("id", card.name + card.describe);
+        const nameText = document.createElement("h3")
+        nameText.textContent = card.name;
+        cardDiv.appendChild(nameText);
+        const catText = document.createElement("h4");
+        catText.textContent = card.category;
+        cardDiv.appendChild(catText);
+        cardDiv.appendChild(document.createElement("br"))
+        const descText = document.createElement("p");
+        descText.textContent = card.describe;
+        cardDiv.appendChild(descText);
+        cardDiv.appendChild(document.createElement("br"))
+        const dueText = document.createElement("span");
+        dueText.textContent = card.due;
+        cardDiv.appendChild(dueText);
+        cardDiv.classList.add("task-card");
+        column.appendChild(cardDiv);
     },
 
     createTask: function (taskName, description, dueDate, category = "") {
@@ -15,33 +39,16 @@ const manager = {
 
 
         /////////    Set Dom Card Element
-        const column = document.querySelector(".to-do");
-        const cardDiv = document.createElement("div");
-        cardDiv.setAttribute("draggable", true)
-        cardDiv.id = taskName + description;
-        const nameText = document.createElement("h3")
-        nameText.textContent = taskName;
-        cardDiv.appendChild(nameText);
-        const catText = document.createElement("h4");
-        catText.textContent = category;
-        cardDiv.appendChild(catText);
-        cardDiv.appendChild(document.createElement("br"))
-        const descText = document.createElement("p");
-        descText.textContent = description;
-        cardDiv.appendChild(descText);
-        cardDiv.appendChild(document.createElement("br"))
-        const dueText = document.createElement("span");
-        dueText.textContent = dueDate
-        cardDiv.appendChild(dueText);
-        cardDiv.classList.add("task-card");
-        column.appendChild(cardDiv);
+        this.placeTask(card);
 
 
 
 
-        this.database[taskName] = card; // flag for weirdness
+        /////// SAVE
+        this.database.tasks[taskName] = card;
 
-
+        ///// Set Timeout
+        console.log(dueDate);
 
     },
 
