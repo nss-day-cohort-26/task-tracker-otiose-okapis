@@ -7,4 +7,4 @@ const saveDatabase = (localStorageKey) => {
     localStorage.setItem(localStorageKey, dataString)
 }
 
-module.exports = Saver;
+module.exports = saveDatabase;
