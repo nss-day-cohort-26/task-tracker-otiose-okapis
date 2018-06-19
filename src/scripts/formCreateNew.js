@@ -26,10 +26,13 @@ const formHeader = buildElement("h2","formHeader","header-title");
 formHeader.textContent = "Create New Task";
 headerDiv.appendChild(formHeader);
 
-// add close btn to header div
-const closeSpan = buildElement("span","closeSpan","close");
-closeSpan.textContent = "X";
-headerDiv.appendChild(closeSpan);
+const closeSpan = document.createElement("H4");
+closeSpan.id="closeSpan";
+closeSpan.className="close clearfix";
+closeSpan.onclick = function() {
+    modal.style.display = "none";
+}
+closeSpan.textContent = "Close Window";
 
 // When the user clicks on <span> (x), close the modal
 closeSpan.onclick = function() {
@@ -103,6 +106,7 @@ const btn = document.getElementById("create-task-button");
 btn.onclick = function() {
     taskModal.style.display = "block";
 }
+
 
 // FORM SUBMISSION
 const testFormSubmission = (e) => {
@@ -182,6 +186,7 @@ const testFormSubmission = (e) => {
 // const createNewTask = () => {
 //     /*manager.createTask(inputDivs.name.querySelector("input").value, inputDivs.description.querySelector("input").value, inputDivs.dueDate.querySelector("input").value, inputDivs.category.querySelector("input").value);
 //     manager.save*/
+
 
 // };
 // attach FORM SUBMISSION routine to submitButton click
