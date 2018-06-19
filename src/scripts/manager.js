@@ -11,6 +11,7 @@ const manager = {
     },
 
     placeTask: function(card){
+        console.log(`.${card.location}`)
         const column = document.querySelector(`.${card.location}`);
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("draggable", true)
@@ -48,7 +49,6 @@ const manager = {
         /////// SAVE
 
         this.database[taskName] = card;
-
         ///// Set Timeout
         console.log(dueDate);
 
@@ -70,13 +70,29 @@ const manager = {
     },
 
     load: function(){
-        this.database = Load("taskDatabase");
+        // const localContactDB = localStorage.getItem("localStorageDB")
+        // console.log("null or nay", localStorage.getItem("localStorageDB") )
+        // if (localContactDB === null) {
+        //     const localStorageDB = {}
+        //     return localStorageDB
+        // }
+        // else {
+            let existingDB = localStorage.getItem("localStorageDB")
+            existingDB = JSON.parse(existingDB)
+            manager.database = existingDB
+            console.log(existingDB)
+        // }
     },
 
     save: function(){
-        Save("taskDatabase", this.database);
-    }
+            let theDatabase = manager.database
+            const dataString = JSON.stringify(theDatabase)
+            localStorage.setItem("localStorageDB", dataString)
+        }
 };
+Object.defineProperty(manager.database, "categories", {
+    enumerable: false
+});
 
 // manager.createTask("test", "testing", "someday", "none");
 
