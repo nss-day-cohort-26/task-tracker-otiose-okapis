@@ -32,6 +32,7 @@ const DragDropManager = Object.create(null, {
                     console.log(data)
                     // Append card to target component as child
                     let targetDiv = document.getElementById(e.target.id);
+                    console.log("am i a card", e);
                     let todoDiv = document.querySelector(".to-do")
                     if (targetDiv.id === "doing" || targetDiv.id === "done") {
                         targetDiv.appendChild(document.getElementById(data));
