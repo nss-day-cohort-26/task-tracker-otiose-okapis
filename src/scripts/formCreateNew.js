@@ -116,6 +116,7 @@ const createNewTask = () => {
     manager.createTask(inputDivs.name.querySelector("input").value, inputDivs.description.querySelector("input").value, inputDivs.dueDate.querySelector("input").value, inputDivs.category.querySelector("input").value);
     manager.save();
     event.preventDefault();
+    taskForm.style.display = "none";
 };
 
 

@@ -1,6 +1,7 @@
 const Task = require("./task");
 const Load = require("./queryStorage");
 const Save = require("./setStorage");
+const Drag = require("./dragNDrop")
 console.log(Save);
 
 
@@ -31,6 +32,7 @@ const manager = {
         cardDiv.appendChild(dueText);
         cardDiv.classList.add("task-card");
         column.appendChild(cardDiv);
+        Drag.init();
     },
 
     createTask: function (taskName, description, dueDate, category = "") {
