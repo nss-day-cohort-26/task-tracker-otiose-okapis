@@ -75,13 +75,20 @@ const createInputDiv = (itemName, itemPrintName) => {
     label.textContent = (itemPrintName + ":");
     label.className = "label";
 
-    if (itemName !== "category") {
+    if (itemName === "name" || itemName === "dueDate") {
         const input = document.createElement("input");
         input.id = (itemName + "Input");
         input.className = "input";
         if (itemName === "dueDate"){
             input.setAttribute("type", "date");
         }
+        newDiv.appendChild(label);
+        newDiv.appendChild(input);
+
+    } if (itemName === "description") {
+        const input = document.createElement("textarea");
+        input.id = (itemName + "Input");
+        input.className = "input";
         newDiv.appendChild(label);
         newDiv.appendChild(input);
     } else if (itemName === "category") {
