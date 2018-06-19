@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    font-family: 'Quattrocento Sans', sans-serif;
 }
 
 body {
@@ -72,14 +73,13 @@ body {
     color: rgba(255, 255, 255, 1);
     text-shadow: 2px 3px 2px grey;
     margin-bottom: 40px;
-    font-family: 'Quattrocento Sans', sans-serif;
-
 }
 
 #create-task-button {
     background-color: rgb(255, 149, 149);
     color: white;
-    width: 20%;
+    min-width: 270px;
+    max-width: 270px;
     height: 50px;
     text-align: center;
     padding: 10px;
