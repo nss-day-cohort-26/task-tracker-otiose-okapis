@@ -280,8 +280,8 @@ const testFormSubmission = (e) => {
 
 }
 submitButton.addEventListener("click", testFormSubmission);
-newCategoryButton = document.getElementById("newCategoryButton");
-newCategoryButton.addEventListener("click", createNewCategory);
+// newCategoryButton = document.getElementById("newCategoryButton");
+// newCategoryButton.addEventListener("click", createNewCategory);
 
 
 

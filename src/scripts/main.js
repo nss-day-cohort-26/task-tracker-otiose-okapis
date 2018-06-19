@@ -1,6 +1,5 @@
 const manager = require("./manager");
-
-
+console.log("RELOAD")
 manager.load();
 
 console.log(manager.database)
