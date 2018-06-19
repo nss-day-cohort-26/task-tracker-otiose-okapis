@@ -1,3 +1,4 @@
+// import notie from "notie"
 const DragDropManager = Object.create(null, {
     init: {
         value: () => {
@@ -30,15 +31,13 @@ const DragDropManager = Object.create(null, {
                     const data = e.dataTransfer.getData("text");
                     console.log(data)
                     // Append card to target component as child
-                    let targetDiv = document.getElementById(e.target.id)
-                    // console.log(targetDiv.id, "yo")
+                    let targetDiv = document.getElementById(e.target.id);
+                    let todoDiv = document.querySelector(".to-do")
                     if (targetDiv.id === "doing" || targetDiv.id === "done") {
                         targetDiv.appendChild(document.getElementById(data));
-                    } else if ( null ) {
-                        console.log("this is correct")
+                    } else if (targetDiv.id === "to-do") {
+                        notie.alert({ type: "warning", text: "Error: You cannot drag todo items into To Do" })
                     }
-
-
                 }
             })
         }
