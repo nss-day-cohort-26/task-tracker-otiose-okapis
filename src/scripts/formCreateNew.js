@@ -20,8 +20,14 @@ const formContent = buildElement("div","formContent","modal-content");
 
 // add close btn to div
 
-const closeSpan = buildElement("span","closeSpan","close");
-closeSpan.textContent = "X";
+const closeSpan = document.createElement("H4");
+closeSpan.id="closeSpan";
+closeSpan.className="close clearfix";
+closeSpan.onclick = function() {
+    modal.style.display = "none";
+}
+closeSpan.textContent = "Close Window";
+
 
 // When the user clicks on <span> (x), close the modal
 closeSpan.onclick = function() {
@@ -87,7 +93,6 @@ const createNewTask = () => {
     event.preventDefault();
     manager.createTask(ins[0].value, ins[1].value, ins[2].value, ins[3].value);
     manager.save();
-
 };
 
 submitButton.addEventListener("click", createNewTask);
