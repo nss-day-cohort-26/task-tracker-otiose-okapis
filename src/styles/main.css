@@ -14,6 +14,7 @@ body {
 
 .grid-wrapper {
     margin: 20px;
+    margin-bottom: 200px;
     display: grid;
     grid-template-columns: 25vw 25vw 25vw;
     grid-gap: 5vw;
@@ -32,11 +33,15 @@ body {
     color: black;
     box-shadow: 4px 5px 5px black;
     padding: 10px 20px;
+    word-wrap: break-word;
+    position: relative;
 }
 
-.task-card:hover {
+.task-card:active {
     z-index: 1;
-    height: 600px;
+    min-height: 300px;
+    height: auto;
+    align-self: center;
 }
 
 .box {
@@ -88,7 +93,7 @@ body {
     padding: 10px;
     overflow: hidden;
     border: .5 solid grey;
-    transistion: .8s;
+    transition: .8s;
     margin-bottom: 15px;
     cursor: pointer;
 }
@@ -107,9 +112,9 @@ body {
 }
 
 #doing .task-card {
-    background-color: red;
+    background-color: rgba(255, 214, 78, 0.842);
 }
 
 #done .task-card {
-    background-color: green;
+    background-color: rgba(74, 197, 74, 0.698);
 }
