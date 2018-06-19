@@ -74,6 +74,7 @@ const createInputDiv = (itemName, itemPrintName) => {
     label.id = (itemName + "Label");
     label.textContent = (itemPrintName + ":");
     label.className = "label";
+
     if (itemName !== "category") {
         const input = document.createElement("input");
         input.id = (itemName + "Input");
@@ -104,6 +105,7 @@ const createInputDiv = (itemName, itemPrintName) => {
         newDiv.appendChild(select);
         newDiv.appendChild(newCategoryButton);
         newDiv.appendChild(newCategoryInput);
+
     }
     return newDiv;
 };
@@ -156,6 +158,7 @@ const createNewTask = () => {
     manager.createTask(inputDivs.name.querySelector("input").value, inputDivs.description.querySelector("input").value, inputDivs.dueDate.querySelector("input").value, inputDivs.category.querySelector("input").value);
     manager.save();
     event.preventDefault();
+    taskForm.style.display = "none";
 };
 
 
@@ -236,6 +239,13 @@ const testFormSubmission = (e) => {
         const ins = document.querySelectorAll("input")
         manager.createTask(ins[0].value, ins[1].value, ins[2].value, ins[3].value)
         manager.save();
+        ins.forEach(input => {
+            input.value = "";
+            if (input.type === "datetime-local"){
+                console.log("date time test");
+
+            }
+        })
         taskModal.style.display = "none";
 
     }

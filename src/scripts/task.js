@@ -4,7 +4,7 @@ class Task {
         this.describe = descrip;
         this.due = date;
         this.category = category;
-        this.location = "toDo"
+        this.location = "to-do"
         Object.defineProperty(this, "category", {enumerable: false});
 
     }

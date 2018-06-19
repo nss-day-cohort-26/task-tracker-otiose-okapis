@@ -1,18 +1,22 @@
 const DragDropManager = Object.create(null, {
     init: {
         value: () => {
-            const stages = document.querySelectorAll(".task-card")
+            const stages = document.querySelectorAll(".task-card");
             console.log(stages)
-
             stages.forEach(stage => {
                 // Gain reference of item being dragged
                 stage.ondragstart = e => {
-                    e.dataTransfer.setData("text", e.target.classList)
+                    e.dataTransfer.setData("text", e.target.id)
+                    console.log(e.target.id)
+
                 }
             })
 
 
+
+
             const targets = document.querySelectorAll(".target")
+            console.log(targets)
 
             targets.forEach(target => {
                 // Dragover not supported by default. Turn that off.
@@ -24,8 +28,12 @@ const DragDropManager = Object.create(null, {
 
                     // Determine what's being dropped
                     const data = e.dataTransfer.getData("text");
+                    console.log(data)
                     // Append card to target component as child
-                    e.target.appendChild(document.querySelector(`.${data.split(" ")[1]}`))
+                    let targetDiv = document.getElementById(e.target.id)
+                    console.log(targetDiv)
+                    targetDiv.appendChild(document.getElementById(data));
+                        // console.log(document.getElementById(data))
                 }
             })
         }
@@ -33,3 +41,5 @@ const DragDropManager = Object.create(null, {
 })
 
 DragDropManager.init()
+
+module.exports = DragDropManager;
