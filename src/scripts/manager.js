@@ -2,7 +2,7 @@ const Task = require("./task");
 const Load = require("./queryStorage");
 const Save = require("./setStorage");
 const Drag = require("./dragNDrop")
-console.log(Save);
+// console.log(Save);
 
 
 const manager = {
@@ -27,7 +27,7 @@ const manager = {
         cardDiv.appendChild(descText);
         cardDiv.appendChild(document.createElement("br"))
         const dueText = document.createElement("span");
-        dueText.textContent = card.due;
+        dueText.textContent = new Date(card.due);
         cardDiv.appendChild(dueText);
         cardDiv.classList.add("task-card");
         column.appendChild(cardDiv);
@@ -48,9 +48,9 @@ const manager = {
         /////// SAVE
 
         this.database[taskName] = card;
-
+        this.save();
         ///// Set Timeout
-        console.log(dueDate);
+        // console.log(dueDate);
 
     },
 
@@ -73,14 +73,18 @@ const manager = {
         this.database = Load("taskDatabase");
     },
 
-    save: function(){
-        Save("taskDatabase", this.database);
+    save: function() {
+        console.log("this test", this);
+        Save.saveDatabase("taskDatabase", this.database);
     }
 };
+Object.defineProperty(manager.database, "category", {
+    enumerable: false
+});
 
 // manager.createTask("test", "testing", "someday", "none");
 
-// console.log(manager.database);
+// console.log("saving test start", manager.database);
 // manager.save();
 // manager.createTask("test222", "testing32", "someday32", "none23");
 // console.log(manager.database);
@@ -89,10 +93,6 @@ const manager = {
 
 
 
-// manager.createTask("test", "testing", "someday", "none");
-// manager.createTask("test2", "testing3", "someday4", "none");
-// manager.setStorage()
-// console.log(manager.database);
 
 module.exports = manager
 
