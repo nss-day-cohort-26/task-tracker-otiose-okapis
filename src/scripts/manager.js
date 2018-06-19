@@ -19,6 +19,7 @@ const manager = {
         console.log("test");
         console.log(column);
         const cardDiv = document.createElement("div");
+        cardDiv.setAttribute("draggable", true)
         const nameText = document.createElement("h3")
         nameText.textContent = taskName;
         cardDiv.appendChild(nameText);
