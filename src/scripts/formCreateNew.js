@@ -65,6 +65,9 @@ const createInputDiv = (itemName, itemPrintName) => {
     newDiv.appendChild(input);
     if (itemName === "dueDate"){
         input.setAttribute("type", "datetime-local");
+        input.value = new Date().toISOString().substring(0, 10);
+    }else{
+        input.value = "Default";
     }
     return newDiv;
 };
@@ -197,6 +200,13 @@ const testFormSubmission = (e) => {
         const ins = document.querySelectorAll("input")
         manager.createTask(ins[0].value, ins[1].value, ins[2].value, ins[3].value)
         manager.save();
+        ins.forEach(input => {
+            input.value = "";
+            if (input.type === "datetime-local"){
+                console.log("date time test");
+
+            }
+        })
         taskModal.style.display = "none";
 
     }
