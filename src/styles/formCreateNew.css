@@ -102,9 +102,3 @@ button:active, .close:active {
     border: none;
     transition: .01s;
 }
-/* 
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-} */
