@@ -18,6 +18,7 @@ const manager = {
         const column = document.querySelector(".to-do");
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("draggable", true)
+        cardDiv.id = taskName + description;
         const nameText = document.createElement("h3")
         nameText.textContent = taskName;
         cardDiv.appendChild(nameText);
