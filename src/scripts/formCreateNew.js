@@ -63,6 +63,9 @@ const createInputDiv = (itemName, itemPrintName) => {
     input.className = "input";
     newDiv.appendChild(label);
     newDiv.appendChild(input);
+    if (itemName === "dueDate"){
+        input.setAttribute("type", "date");
+    }
     return newDiv;
 };
 
@@ -77,6 +80,7 @@ for (let i = 0; i < inputDivs.length; i++) {
     inputsForm.appendChild(createInputDiv(inputDivs[i][0],inputDivs[i][1]));
 }
 //attach submit button to input form
+
 const submitButtonDiv = document.createElement("div");
 submitButtonDiv.id = "submitButtonDiv";
 const submissionResponse = document.createElement("div");
@@ -189,16 +193,21 @@ const testFormSubmission = (e) => {
     if (formValid[0] && formValid[1] && formValid[2] && formValid[3]) {
         setResponse(true);
         setTimeout(function(){console.log("success");},5000);
+        e.preventDefault();
+        const ins = document.querySelectorAll("input")
+        manager.createTask(ins[0].value, ins[1].value, ins[2].value, ins[3].value)
+        manager.save();
+        taskModal.style.display = "none";
+
     }
+
+
 }
-// const createNewTask = () => {
-//     /*manager.createTask(inputDivs.name.querySelector("input").value, inputDivs.description.querySelector("input").value, inputDivs.dueDate.querySelector("input").value, inputDivs.category.querySelector("input").value);
-//     manager.save*/
 
 
 // };
 // attach FORM SUBMISSION routine to submitButton click
-submitButton.addEventListener("click", function(e){testFormSubmission(e);});
+submitButton.addEventListener("click", testFormSubmission)
 
 
 

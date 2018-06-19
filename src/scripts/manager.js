@@ -35,8 +35,10 @@ const manager = {
         cardDiv.classList.add("task-card");
         column.appendChild(cardDiv);
 
+
+
+
         this.database[taskName] = card; // flag for weirdness
-        return card;
 
 
 
