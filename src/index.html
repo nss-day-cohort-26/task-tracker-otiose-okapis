@@ -5,7 +5,14 @@
   <title>Task Tracker</title>
   <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans|Quicksand" rel="stylesheet">
   <link rel="stylesheet" href="./styles/main.css">
-  <link rel="stylesheet" href="./styles/formCreateNew.css"
+  <link rel="stylesheet" href="./styles/formCreateNew.css">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+  <style>
+    /* override styles here */
+    .notie-container {
+      box-shadow: none;
+    }
+  </style>
 </head>
 <body>
   <div id="page-container">
@@ -13,7 +20,7 @@
     <h3 id="create-task-button">Create New Task</h3>
     <div id="modal-form"></div>
     <section class="grid-wrapper">
-      <div class="to-do box target "><h2>To Do:</h2><div class="border-line"></div>
+      <div class="to-do box target " id="to-do"><h2>To Do:</h2><div class="border-line"></div>
     </div>
       <div class="doing box target" id="doing"><h2>Doing:</h2><div class="border-line"></div>
       </div>
@@ -23,6 +30,7 @@
     </section>
   </div>
   <script src="./bundle.js"></script>
+  <script src="https://unpkg.com/notie"></script>
 </body>
 </html>
 
