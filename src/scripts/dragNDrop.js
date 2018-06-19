@@ -27,7 +27,8 @@ const DragDropManager = Object.create(null, {
                     const data = e.dataTransfer.getData("text");
                     console.log(data)
                     // Append card to target component as child
-                    e.target.appendChild(document.querySelector(`.${data.split(" ")[1]}`))
+                    // e.target.appendChild(document.querySelector(`.${data.split(" ")[1]}`))
+                    console.log(e.target)
                 }
             })
         }
