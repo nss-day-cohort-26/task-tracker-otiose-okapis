@@ -66,7 +66,8 @@ const createNewCategory = (e) => {
 
 //function for creating label/input divs
 const createInputDiv = (itemName, itemPrintName) => {
-    manager.load();
+
+    console.log("find manager", manager.database);
     const categories = manager.database.categories;
     const newDiv = document.createElement("div");
     newDiv.className = "inputDiv";
@@ -85,51 +86,52 @@ const createInputDiv = (itemName, itemPrintName) => {
         input.value = moment().format("YYYY-MM-DD") + "T23:59";
     } else {
         input.value = "Default";
+    };
 
-    if (itemName === "name" || itemName === "dueDate") {
-        const input = document.createElement("input");
-        input.id = (itemName + "Input");
-        input.className = "input";
-        if (itemName === "dueDate"){
-            input.setAttribute("type", "date");
-        }
-        newDiv.appendChild(label);
-        newDiv.appendChild(input);
+    // if (itemName === "name" || itemName === "dueDate") {
+    //     const input = document.createElement("input");
+    //     input.id = (itemName + "Input");
+    //     input.className = "input";
+    //     if (itemName === "dueDate"){
+    //         input.setAttribute("type", "date");
+    //     }
+    //     newDiv.appendChild(label);
+    //     newDiv.appendChild(input);
 
-    } if (itemName === "description") {
-        const input = document.createElement("textarea");
-        input.id = (itemName + "Input");
-        input.className = "input";
-        newDiv.appendChild(label);
-        newDiv.appendChild(input);
-    } else if (itemName === "category") {
+    // } if (itemName === "description") {
+    //     const input = document.createElement("textarea");
+    //     input.id = (itemName + "Input");
+    //     input.className = "input";
+    //     newDiv.appendChild(label);
+    //     newDiv.appendChild(input);
+    // } else if (itemName === "category") {
 
-        const newCategoryDiv = document.createElement("div");
-        newCategoryDiv.id = "newCategoryDiv";
-        const select = document.createElement("select");
-        select.id = (itemName + "Input");
-        select.className = "input";
+    //     const newCategoryDiv = document.createElement("div");
+    //     newCategoryDiv.id = "newCategoryDiv";
+    //     const select = document.createElement("select");
+    //     select.id = (itemName + "Input");
+    //     select.className = "input";
 
-        categories.forEach(category => {
-            let option = document.createElement("option");
-            option.text = category;
-            select.add(option);
-        })
+    //     categories.forEach(category => {
+    //         let option = document.createElement("option");
+    //         option.text = category;
+    //         select.add(option);
+    //     })
 
-        const newCategoryButton = document.createElement("button");
-        newCategoryButton.id = "newCategoryButton";
-        newCategoryButton.textContent = "Create New";
-        const newCategoryInput = document.createElement("input");
-        newCategoryInput.id = "newCategoryInput";
+    //     const newCategoryButton = document.createElement("button");
+    //     newCategoryButton.id = "newCategoryButton";
+    //     newCategoryButton.textContent = "Create New";
+    //     const newCategoryInput = document.createElement("input");
+    //     newCategoryInput.id = "newCategoryInput";
 
-        newCategoryDiv.appendChild(select);
-        newCategoryDiv.appendChild(newCategoryButton);
-        newCategoryDiv.appendChild(newCategoryInput);
+    //     newCategoryDiv.appendChild(select);
+    //     newCategoryDiv.appendChild(newCategoryButton);
+    //     newCategoryDiv.appendChild(newCategoryInput);
 
-        newDiv.appendChild(label);
-        newDiv.appendChild(newCategoryDiv);
+    //     newDiv.appendChild(label);
+    //     newDiv.appendChild(newCategoryDiv);
 
-    }
+    // }
     return newDiv;
 };
 
@@ -174,6 +176,7 @@ const btn = document.getElementById("create-task-button");
 
 // add event to button that makes modal form appear on click
 btn.onclick = function () {
+    // console.log("button test");
     taskModal.style.display = "block";
 }
 
@@ -276,10 +279,6 @@ const testFormSubmission = (e) => {
 
 
 }
-
-
-// };
-// attach FORM SUBMISSION routine to submitButton click
 submitButton.addEventListener("click", testFormSubmission);
 newCategoryButton = document.getElementById("newCategoryButton");
 newCategoryButton.addEventListener("click", createNewCategory);
@@ -288,8 +287,5 @@ newCategoryButton.addEventListener("click", createNewCategory);
 
 
 
-
-
-
-
+// attach FORM SUBMISSION routine to submitButton click
 
