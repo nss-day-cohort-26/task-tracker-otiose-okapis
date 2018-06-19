@@ -4,42 +4,42 @@ const manager = require("./manager");
 // functions called in this script for creating modal form elements
 const buildElement = (type, id, className, display) => {
     const element = document.createElement(type);
-    element.id=id;
-    element.className=className;
+    element.id = id;
+    element.className = className;
     if (display) {
-        element.style.display=display;
+        element.style.display = display;
     }
     return element;
 }
 
 //create main modal div
-const taskModal = buildElement("div","taskModal","modal","none");
+const taskModal = buildElement("div", "taskModal", "modal", "none");
 
 //create header div
-const headerDiv = buildElement("div","headerDiv","header");
+const headerDiv = buildElement("div", "headerDiv", "header");
 
 // create div for form content
-const formContent = buildElement("div","formContent","modal-content");
+const formContent = buildElement("div", "formContent", "modal-content");
 
 // add h1 to header div
-const formHeader = buildElement("h2","formHeader","header-title");
+const formHeader = buildElement("h2", "formHeader", "header-title");
 formHeader.textContent = "Create New Task";
 headerDiv.appendChild(formHeader);
 
 const closeSpan = document.createElement("H4");
-closeSpan.id="closeSpan";
-closeSpan.className="close clearfix";
-closeSpan.onclick = function() {
+closeSpan.id = "closeSpan";
+closeSpan.className = "close clearfix";
+closeSpan.onclick = function () {
     modal.style.display = "none";
 }
 closeSpan.textContent = "Close Window";
 
 // When the user clicks on <span> (x), close the modal
-closeSpan.onclick = function() {
+closeSpan.onclick = function () {
     taskModal.style.display = "none";
 }
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target === taskModal) {
         taskModal.style.display = "none";
     }
@@ -63,10 +63,10 @@ const createInputDiv = (itemName, itemPrintName) => {
     input.className = "input";
     newDiv.appendChild(label);
     newDiv.appendChild(input);
-    if (itemName === "dueDate"){
+    if (itemName === "dueDate") {
         input.setAttribute("type", "datetime-local");
         input.value = moment().format("YYYY-MM-DD") + "T23:59";
-    }else{
+    } else {
         input.value = "Default";
     }
     return newDiv;
@@ -74,13 +74,13 @@ const createInputDiv = (itemName, itemPrintName) => {
 
 //create label/input pairs for NAME, DESCRIPTION, DUEDATE, CATEGORY
 const inputDivs = [
-    ["name","Name"],
-    ["description","Description"],
-    ["dueDate","Due Date"],
-    ["category","Category"]
+    ["name", "Name"],
+    ["description", "Description"],
+    ["dueDate", "Due Date"],
+    ["category", "Category"]
 ]
 for (let i = 0; i < inputDivs.length; i++) {
-    inputsForm.appendChild(createInputDiv(inputDivs[i][0],inputDivs[i][1]));
+    inputsForm.appendChild(createInputDiv(inputDivs[i][0], inputDivs[i][1]));
 }
 //attach submit button to input form
 
@@ -111,7 +111,7 @@ document.getElementById("modal-form").appendChild(taskModal);
 const btn = document.getElementById("create-task-button");
 
 // add event to button that makes modal form appear on click
-btn.onclick = function() {
+btn.onclick = function () {
     taskModal.style.display = "block";
 }
 
@@ -147,7 +147,7 @@ const testFormSubmission = (e) => {
     const nameIsValid = () => {
         if (name.value === "") {
             name.style.backgroundColor = "red";
-            setResponse(false,"Please fill out all fields");
+            setResponse(false, "Please fill out all fields");
             return false;
         } else {
             name.style.backgroundColor = "whitesmoke";
@@ -159,7 +159,7 @@ const testFormSubmission = (e) => {
     const descriptionIsValid = () => {
         if (description.value === "") {
             description.style.backgroundColor = "red";
-            setResponse(false,"Please fill out all fields");
+            setResponse(false, "Please fill out all fields");
             return false;
         } else {
             description.style.backgroundColor = "whitesmoke";
@@ -170,7 +170,7 @@ const testFormSubmission = (e) => {
     const dueDateIsValid = () => {
         if (dueDate.value === "") {
             dueDate.style.backgroundColor = "red";
-            setResponse(false,"Please fill out all fields");
+            setResponse(false, "Please fill out all fields");
             return false;
         } else {
             dueDate.style.backgroundColor = "whitesmoke";
@@ -181,7 +181,7 @@ const testFormSubmission = (e) => {
     const categoryIsValid = () => {
         if (category.value === "") {
             category.style.backgroundColor = "red";
-            setResponse(false,"Please fill out all fields");
+            setResponse(false, "Please fill out all fields");
             return false;
         } else {
             category.style.backgroundColor = "whitesmoke";
@@ -195,7 +195,7 @@ const testFormSubmission = (e) => {
     //if the form is complete >> show complete >> pause >> submit form
     if (formValid[0] && formValid[1] && formValid[2] && formValid[3]) {
         setResponse(true);
-        setTimeout(function(){console.log("success");},5000);
+        setTimeout(function () { console.log("success"); }, 5000);
         e.preventDefault();
         const ins = document.querySelectorAll("input")
         manager.createTask(ins[0].value, ins[1].value, ins[2].value, ins[3].value);
@@ -203,7 +203,7 @@ const testFormSubmission = (e) => {
         manager.save();
         ins.forEach(input => {
             input.value = "";
-            if (input.type === "datetime-local"){
+            if (input.type === "datetime-local") {
                 input.value = moment().format("YYYY-MM-DD") + "T23:59";
 
             }

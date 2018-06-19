@@ -70,15 +70,13 @@ const manager = {
     },
 
     load: function(){
-        this.database = Load("taskDatabase");
     },
 
     save: function() {
-        console.log("this test", this);
-        Save.saveDatabase("taskDatabase", this.database);
-    }
+        
+      }
 };
-Object.defineProperty(manager.database, "category", {
+Object.defineProperty(manager.database, "categories", {
     enumerable: false
 });
 
