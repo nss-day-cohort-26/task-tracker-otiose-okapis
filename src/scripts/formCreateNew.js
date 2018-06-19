@@ -66,6 +66,7 @@ const createNewCategory = (e) => {
 
 //function for creating label/input divs
 const createInputDiv = (itemName, itemPrintName) => {
+    manager.load();
     const categories = manager.database.categories;
     const newDiv = document.createElement("div");
     newDiv.className = "inputDiv";
