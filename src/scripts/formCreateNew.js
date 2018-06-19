@@ -55,8 +55,13 @@ const createNewCategory = (e) => {
     const categories = manager.database.categories;
     newCat = document.getElementById("newCategoryInput");
     categories.push(newCat.value);
+
+    const categoryInput = document.getElementById("categoryInput");
+    let option = document.createElement("option");
+    option.text = newCat.value;
+    categoryInput.add(option);
     newCat.value = "";
-    console.log(categories);
+    manager.save();
 }
 
 //function for creating label/input divs
