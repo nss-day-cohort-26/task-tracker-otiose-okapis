@@ -36,7 +36,7 @@ const DragDropManager = Object.create(null, {
                     if (targetDiv.id === "doing" || targetDiv.id === "done") {
                         targetDiv.appendChild(document.getElementById(data));
                     } else if (targetDiv.id === "to-do") {
-                        notie.alert({ type: "warning", text: "Error: You cannot drag todo items into To Do" })
+                        notie.alert({ type: "warning", text: "Error: You cannot drag items into To Do" })
                     }
                 }
             })
