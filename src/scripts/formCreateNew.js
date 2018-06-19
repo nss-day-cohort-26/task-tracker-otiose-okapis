@@ -44,6 +44,7 @@ window.onclick = function(event) {
         taskModal.style.display = "none";
     }
 }
+headerDiv.appendChild(closeSpan);
 
 //create form to hold user inputs
 const inputsForm = document.createElement("form");
