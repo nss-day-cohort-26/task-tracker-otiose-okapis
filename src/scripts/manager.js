@@ -72,18 +72,20 @@ const manager = {
 
     load: function(){
 
-        // const localContactDB = localStorage.getItem("localStorageDB")
-        // console.log("null or nay", localStorage.getItem("localStorageDB") )
-        // if (localContactDB === null) {
-        //     const localStorageDB = {}
-        //     return localStorageDB
-        // }
-        // else {
+        const localContactDB = localStorage.getItem("localStorageDB")
+        console.log("null or nay", localStorage.getItem("localStorageDB") )
+        if (localContactDB === null) {
+            const localStorageDB = {
+                categories: ["test1", "test2", "test3"],
+            }
+            return localStorageDB
+        }
+        else {
             let existingDB = localStorage.getItem("localStorageDB")
             existingDB = JSON.parse(existingDB)
             manager.database = existingDB
             console.log(existingDB)
-        // }
+        }
     },
 
     save: function(){
