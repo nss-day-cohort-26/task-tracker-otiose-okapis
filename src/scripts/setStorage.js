@@ -1,11 +1,10 @@
-const Saver = {
 
-    saveDatabase: (localStorageKey, databaseObject) => {
-        console.log("in setStorage", databaseObject);
-        const dataString = JSON.stringify(databaseObject)
-        console.log("datastring", dataString);
-        localStorage.setItem(localStorageKey, dataString)
-    }
+const manager = require("./manager")
+
+const saveDatabase = (localStorageKey) => {
+    let theDatabase = manager.database
+    const dataString = JSON.stringify(theDatabase)
+    localStorage.setItem(localStorageKey, dataString)
 }
 
 module.exports = Saver;

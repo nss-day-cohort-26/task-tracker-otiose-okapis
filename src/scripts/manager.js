@@ -7,10 +7,11 @@ const Drag = require("./dragNDrop")
 
 const manager = {
     database: {
-        categories: [],
+        categories: ["test1", "test2", "test3"],
     },
 
     placeTask: function(card){
+        console.log(`.${card.location}`)
         const column = document.querySelector(`.${card.location}`);
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("draggable", true)
@@ -48,7 +49,7 @@ const manager = {
         /////// SAVE
 
         this.database[taskName] = card;
-        this.save();
+
         ///// Set Timeout
         // console.log(dueDate);
 
@@ -70,11 +71,26 @@ const manager = {
     },
 
     load: function(){
+
+        // const localContactDB = localStorage.getItem("localStorageDB")
+        // console.log("null or nay", localStorage.getItem("localStorageDB") )
+        // if (localContactDB === null) {
+        //     const localStorageDB = {}
+        //     return localStorageDB
+        // }
+        // else {
+            let existingDB = localStorage.getItem("localStorageDB")
+            existingDB = JSON.parse(existingDB)
+            manager.database = existingDB
+            console.log(existingDB)
+        // }
     },
 
-    save: function() {
-        
-      }
+    save: function(){
+            let theDatabase = manager.database
+            const dataString = JSON.stringify(theDatabase)
+            localStorage.setItem("localStorageDB", dataString)
+        }
 };
 Object.defineProperty(manager.database, "categories", {
     enumerable: false
