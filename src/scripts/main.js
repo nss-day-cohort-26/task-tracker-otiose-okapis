@@ -1,11 +1,8 @@
 const manager = require("./manager");
-Object.defineProperty(manager.database, "category", {
-    enumerable: false
-});
-function reset(){
-    localStorage.clear()
-}
+
+
 manager.load();
+
 console.log(manager.database)
 
 for (task in manager.database){
