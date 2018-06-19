@@ -49,8 +49,19 @@ headerDiv.appendChild(closeSpan);
 //create form to hold user inputs
 const inputsForm = document.createElement("form");
 
+// function response to create new category click
+const createNewCategory = (e) => {
+    e.preventDefault();
+    const categories = manager.database.categories;
+    newCat = document.getElementById("newCategoryInput");
+    categories.push(newCat.value);
+    newCat.value = "";
+    console.log(categories);
+}
+
 //function for creating label/input divs
 const createInputDiv = (itemName, itemPrintName) => {
+    const categories = manager.database.categories;
     const newDiv = document.createElement("div");
     newDiv.className = "inputDiv";
     newDiv.id = itemName + "Div";
@@ -58,13 +69,36 @@ const createInputDiv = (itemName, itemPrintName) => {
     label.id = (itemName + "Label");
     label.textContent = (itemPrintName + ":");
     label.className = "label";
-    const input = document.createElement("input");
-    input.id = (itemName + "Input");
-    input.className = "input";
-    newDiv.appendChild(label);
-    newDiv.appendChild(input);
-    if (itemName === "dueDate"){
-        input.setAttribute("type", "date");
+    if (itemName !== "category") {
+        const input = document.createElement("input");
+        input.id = (itemName + "Input");
+        input.className = "input";
+        if (itemName === "dueDate"){
+            input.setAttribute("type", "date");
+        }
+        newDiv.appendChild(label);
+        newDiv.appendChild(input);
+    } else if (itemName === "category") {
+        const select = document.createElement("select");
+        select.id = (itemName + "Input");
+        select.className = "input";
+
+        categories.forEach(category => {
+            let option = document.createElement("option");
+            option.text = category;
+            select.add(option);
+        })
+
+        const newCategoryButton = document.createElement("button");
+        newCategoryButton.id = "newCategoryButton";
+        newCategoryButton.textContent = "Create New";
+        const newCategoryInput = document.createElement("input");
+        newCategoryInput.id = "newCategoryInput";
+
+        newDiv.appendChild(label);
+        newDiv.appendChild(select);
+        newDiv.appendChild(newCategoryButton);
+        newDiv.appendChild(newCategoryInput);
     }
     return newDiv;
 };
@@ -79,6 +113,7 @@ const inputDivs = [
 for (let i = 0; i < inputDivs.length; i++) {
     inputsForm.appendChild(createInputDiv(inputDivs[i][0],inputDivs[i][1]));
 }
+
 //attach submit button to input form
 
 const submitButtonDiv = document.createElement("div");
@@ -206,7 +241,9 @@ const testFormSubmission = (e) => {
 
 // };
 // attach FORM SUBMISSION routine to submitButton click
-submitButton.addEventListener("click", testFormSubmission)
+submitButton.addEventListener("click", testFormSubmission);
+newCategoryButton = document.getElementById("newCategoryButton");
+newCategoryButton.addEventListener("click", createNewCategory);
 
 
 
