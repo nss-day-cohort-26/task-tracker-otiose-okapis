@@ -44,7 +44,7 @@ const inputsDocForm = document.createElement("form");
 
 
 const nameDiv = document.createElement("div");
-const nameLabel = document.createElement("span");
+const nameLabel = document.createElement("h4");
 nameLabel.id = "nameLabel"
 nameLabel.textContent = "Task Name: "
 const nameInput = document.createElement("input");
@@ -53,16 +53,16 @@ nameDiv.appendChild(nameLabel);
 nameDiv.appendChild(nameInput);
 
 const descriptionDiv = document.createElement("div");
-const descriptionLabel = document.createElement("span");
+const descriptionLabel = document.createElement("h4");
 descriptionLabel.id = "descriptionLabel"
 descriptionLabel.textContent = "Task Description: "
-const descriptionInput = document.createElement("input");
+const descriptionInput = document.createElement("textarea");
 descriptionInput.id = "descriptionInput";
 descriptionDiv.appendChild(descriptionLabel);
 descriptionDiv.appendChild(descriptionInput);
 
 const dueDateDiv = document.createElement("div");
-const dueDateLabel = document.createElement("span");
+const dueDateLabel = document.createElement("h4");
 dueDateLabel.id = "dueDateLabel"
 dueDateLabel.textContent = "Task dueDate: "
 const dueDateInput = document.createElement("input");
@@ -72,7 +72,7 @@ dueDateDiv.appendChild(dueDateInput);
 
 const categoryInput = document.createElement("input");
 const categoryInputDiv = document.createElement("div");
-const categoryInputLabel = document.createElement("span");
+const categoryInputLabel = document.createElement("h4");
 categoryInputLabel.id = "categoryInputLabel"
 categoryInputLabel.textContent = "Task categoryInput: "
 const categoryInputInput = document.createElement("input");
@@ -81,7 +81,7 @@ categoryInputDiv.appendChild(categoryInputLabel);
 categoryInputDiv.appendChild(categoryInputInput);
 
 const locationDiv = document.createElement("div");
-const locationLabel = document.createElement("span");
+const locationLabel = document.createElement("h4");
 locationLabel.id = "locationLabel"
 locationLabel.textContent = "Task location: "
 const locationInput = document.createElement("input");
