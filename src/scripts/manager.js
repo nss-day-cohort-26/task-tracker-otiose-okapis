@@ -15,9 +15,7 @@ const manager = {
 
 
         /////////    Set Dom Card Element
-        const column = document.querySelector(".to-do");
-        console.log("test");
-        console.log(column);
+        const column = document.querySelector(".to-do");\
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("draggable", true)
         const nameText = document.createElement("h3")
