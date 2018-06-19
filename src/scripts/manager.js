@@ -7,7 +7,7 @@ console.log(Save);
 
 const manager = {
     database: {
-        categories: [],
+        categories: ["test1", "test2", "test3"],
     },
 
     placeTask: function(card){
