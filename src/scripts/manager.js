@@ -6,7 +6,6 @@ console.log(Save);
 
 const manager = {
     database: {
-        tasks: {},
         categories: [],
     },
 
@@ -45,7 +44,8 @@ const manager = {
 
 
         /////// SAVE
-        this.database.tasks[taskName] = card;
+
+        this.database[taskName] = card;
 
         ///// Set Timeout
         console.log(dueDate);
