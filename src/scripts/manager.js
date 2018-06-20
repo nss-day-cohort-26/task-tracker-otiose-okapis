@@ -76,7 +76,7 @@ const manager = {
         console.log("null or nay", localStorage.getItem("localStorageDB") )
         if (localContactDB === null) {
             const localStorageDB = {
-                categories: ["test1", "test2", "test3"],
+                categories: ["test1", "test2", "test3"]
             }
             return localStorageDB
         }

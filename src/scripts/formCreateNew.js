@@ -20,6 +20,8 @@ const createNewCategory = (e) => {
 
 // Test Then Create New Task
 const testFormSubmission = (e) => {
+    e.preventDefault();
+
     const name = document.getElementById("nameInput");
     const description = document.getElementById("descriptionInput");
     const dueDate = document.getElementById("dueDateInput");
@@ -33,7 +35,7 @@ const testFormSubmission = (e) => {
         } else {
             submissionResponse.className = "failure";
             submissionResponse.textContent = msg;
-            e.preventDefault();
+           
         }
     }
 
