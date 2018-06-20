@@ -67,7 +67,7 @@ const createNewCategory = (e) => {
 //function for creating label/input divs
 const createInputDiv = (itemName, itemPrintName) => {
 
-    console.log("find manager", manager.database);
+    // console.log("find manager", manager.database);
     const categories = manager.database.categories;
     const newDiv = document.createElement("div");
     newDiv.className = "inputDiv";
@@ -260,7 +260,7 @@ const testFormSubmission = (e) => {
     //if the form is complete >> show complete >> pause >> submit form
     if (formValid[0] && formValid[1] && formValid[2] && formValid[3]) {
         setResponse(true);
-        setTimeout(function () { console.log("success"); }, 5000);
+        // setTimeout(function () { console.log("success"); }, 5000);
         e.preventDefault();
         const ins = document.querySelectorAll("input")
         manager.createTask(ins[0].value, ins[1].value, ins[2].value, ins[3].value);

@@ -117,3 +117,7 @@ body {
 #done .task-card {
     background-color: rgba(74, 197, 74, 0.698);
 }
+
+#overDue {
+    color: red;
+}

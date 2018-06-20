@@ -10,8 +10,8 @@ const manager = {
         categories: ["test1", "test2", "test3"],
     },
 
-    placeTask: function(card){
-        console.log(`.${card.location}`)
+    placeTask: function (card) {
+        // console.log(`.${card.location}`)
         const column = document.querySelector(`.${card.location}`);
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("draggable", true)
@@ -33,6 +33,7 @@ const manager = {
         cardDiv.appendChild(dueText);
         cardDiv.appendChild(document.createElement("br"))
         let archiveBtn = document.createElement("button");
+        archiveBtn.setAttribute("id", "archiveBtn");
         archiveBtn.textContent = "Archive";
         archiveBtn.style.visibility = "hidden";
         archiveBtn.addEventListener("click", this.archive)
@@ -40,11 +41,20 @@ const manager = {
         cardDiv.classList.add("task-card");
         column.appendChild(cardDiv);
         DragDropManager.init();
+        const checkNow = Date.now();
+        const checkDue = new Date(card.due);
+        const lateTime = checkDue - checkNow;
+        const saveName = card.name;
+        // console.log("card name", card.name)
+        if (checkNow < checkDue) {
+            setTimeout(() => { timeOutM(card.name) }, lateTime);
+        }
     },
 
     createTask: function (taskName, description, dueDate, category = "") {
         const card = new Task(taskName, description, dueDate, category);
-
+        const checkNow = Date.now();
+        const checkDue = new Date(dueDate);
 
 
         /////////    Set Dom Card Element
@@ -77,10 +87,10 @@ const manager = {
         }
     },
 
-    load: function(){
+    load: function () {
 
         const localContactDB = localStorage.getItem("localStorageDB")
-        console.log("null or nay", localStorage.getItem("localStorageDB") )
+        // console.log("null or nay", localStorage.getItem("localStorageDB") )
         if (localContactDB === null) {
             const localStorageDB = {
                 categories: ["test1", "test2", "test3"],
@@ -91,25 +101,25 @@ const manager = {
             let existingDB = localStorage.getItem("localStorageDB")
             existingDB = JSON.parse(existingDB)
             manager.database = existingDB
-            console.log(existingDB)
+            // console.log(existingDB)
         }
     },
 
-    save: function(){
-            const toDoDiv = document.getElementById("to-do").childNodes
-            const doingDiv = document.getElementById("doing").childNodes
-            const doneDiv = document.getElementById("done").childNodes
-            let divArray = [toDoDiv, doingDiv, doneDiv]
-            for (let div in divArray){
-                let cardDiv = document.getElementsByClassName("task-card")
-                console.log(cardDiv)
+    save: function () {
+        const toDoDiv = document.getElementById("to-do").childNodes
+        const doingDiv = document.getElementById("doing").childNodes
+        const doneDiv = document.getElementById("done").childNodes
+        let divArray = [toDoDiv, doingDiv, doneDiv]
+        for (let div in divArray) {
+            let cardDiv = document.getElementsByClassName("task-card")
+            // console.log(cardDiv)
 
-            }
-            let theDatabase = manager.database
-            const dataString = JSON.stringify(theDatabase)
-            localStorage.setItem("localStorageDB", dataString)
-        },
-    archive: function(){
+        }
+        let theDatabase = manager.database
+        const dataString = JSON.stringify(theDatabase)
+        localStorage.setItem("localStorageDB", dataString)
+    },
+    archive: function () {
         this.parentNode.remove();
 
     }
@@ -118,6 +128,16 @@ Object.defineProperty(manager.database, "categories", {
     enumerable: false
 });
 
+function timeOutM(taskM) {
+    console.log(taskM);
+    const taskN = manager.database[`${taskM}`].name;
+    const cardT = document.querySelector(`[data-name = ${taskN}]`)
+    const overDue = document.createElement("h5");
+    overDue.setAttribute("id", "overDue");
+    overDue.textContent = "THIS TASK IS OVERDUE"
+    cardT.appendChild(overDue);
+}
+
 /////////////-------------------------------------------------------Drag N Drop Manager-----------------------------///////////////////
 
 const DragDropManager = Object.create(null, {
@@ -125,12 +145,12 @@ const DragDropManager = Object.create(null, {
         value: () => {
             const stages = document.querySelectorAll(".task-card");
             let whichCard = ""
-            console.log(stages)
+            // console.log(stages)
             stages.forEach(stage => {
                 // Gain reference of item being dragged
                 stage.ondragstart = e => {
                     e.dataTransfer.setData("text", e.target.id)
-                    console.log(e.target.dataset.name)
+                    // console.log(e.target.dataset.name)
                     whichCard = e.target.dataset.name
 
                 }
@@ -157,9 +177,9 @@ const DragDropManager = Object.create(null, {
                     let targetDiv = document.getElementById(e.target.id);
                     // console.log("am i a card", e);
                     let todoDiv = document.querySelector(".to-do")
-                    if (targetDiv === null){
+                    if (targetDiv === null) {
                         targetDiv.parentNode.appendChild(document.getElementById(data));
-                        console.log(target)
+                        // console.log(target)
                     }
                     if (targetDiv.id === "doing" || targetDiv.id === "done") {
                         let archiveBtn = document.getElementById(data).childNodes
