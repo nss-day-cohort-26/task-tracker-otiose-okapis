@@ -30,6 +30,11 @@ const manager = {
         const dueText = document.createElement("span");
         dueText.textContent = new Date(card.due);
         cardDiv.appendChild(dueText);
+        cardDiv.appendChild(document.createElement("br"))
+        let archiveBtn = document.createElement("button");
+        archiveBtn.textContent = "Archive";
+        archiveBtn.style.visibility = "hidden";
+        cardDiv.appendChild(archiveBtn);
         cardDiv.classList.add("task-card");
         column.appendChild(cardDiv);
         Drag.init();

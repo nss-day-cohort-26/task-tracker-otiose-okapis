@@ -36,6 +36,11 @@ const DragDropManager = Object.create(null, {
                     let todoDiv = document.querySelector(".to-do")
                     if (targetDiv.id === "doing" || targetDiv.id === "done") {
                         targetDiv.appendChild(document.getElementById(data));
+                        if (targetDiv.id === "done") {
+                            let archiveBtn = document.getElementById(data).childNodes
+                            console.log(archiveBtn[6])
+                            archiveBtn[7].style.visibility = "visible"
+                        }
                     } else if (targetDiv.id === "to-do") {
                         notie.alert({ type: "warning", text: "Error: You cannot drag items into To Do" })
                     }
