@@ -16,6 +16,7 @@ const createNewCategory = (e) => {
         let option = document.createElement("option");
         option.text = newCat.value;
         categoryInput.add(option);
+        notie.alert({ type: "success", text: "New Category added successfully" })
     }
 }
 
@@ -95,6 +96,7 @@ const testFormSubmission = (e) => {
         // console.log(manager);
         manager.save();
         taskModal.style.display = "none";
+        notie.alert({ type: "success", text: "New Task added successfully" })
     }
 }
 
