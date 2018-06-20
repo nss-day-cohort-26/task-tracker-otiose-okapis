@@ -111,6 +111,8 @@ const manager = {
         },
     archive: function(){
         this.parentNode.remove();
+        console.log()
+        manager.save();
 
     }
 };
