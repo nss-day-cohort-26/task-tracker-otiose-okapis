@@ -98,12 +98,13 @@ const testFormSubmission = (e) => {
         manager.save();
         taskModal.style.display = "none";
         notie.alert({ type: "success", text: "New Task added successfully" })
+        resetForm();
     }
 }
 
 // CLEAR FORM inputs when closed
 const resetForm = () => {
-    const ins = [document.getElementById("nameInput"), document.getElementById("descriptionInput"), document.getElementById("dueDateInput"), document.getElementById("categoryInput")];
+    const ins = [document.getElementById("nameInput"), document.getElementById("descriptionInput"), document.getElementById("dueDateInput")];
 
     ins.forEach(input => {
         input.value = "";
