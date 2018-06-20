@@ -131,13 +131,8 @@ const manager = {
         const theArchive = document.querySelector(".archive")
         manager.database[cardName.dataset.name].location = "archive"
         manager.database[cardName.dataset.name].archive = true
-        
         manager.save();
-        // cardName.remove();
-        // manager.placeTask(cardName)
         theArchive.appendChild(cardName)
-
-
     }
 };
 Object.defineProperty(manager.database, "categories", {
