@@ -128,9 +128,14 @@ const manager = {
         localStorage.setItem("localStorageDB", dataString)
     },
     archive: function (cardName) {
+        const theArchive = document.querySelector(".archive")
+        manager.database[cardName.dataset.name].location = "archive"
         manager.database[cardName.dataset.name].archive = true
+        
         manager.save();
-        cardName.remove();
+        // cardName.remove();
+        // manager.placeTask(cardName)
+        theArchive.appendChild(cardName)
 
 
     }
@@ -190,13 +195,13 @@ const DragDropManager = Object.create(null, {
                     // console.log("am i a card", e);
                     let todoDiv = document.querySelector(".to-do")
 
-                    if (targetDiv.id === "doing" || targetDiv.id === "done") {
+                    if (e.target.id === "doing" || e.target.id === "done") {
                         let archiveBtn = document.getElementById(data).childNodes
                         archiveBtn[7].style.visibility = "hidden";
-                        targetDiv.appendChild(document.getElementById(data));
+                        e.target.appendChild(document.getElementById(data));
                         manager.database[whichCard].location = e.target.id
                         manager.save()
-                        if (targetDiv.id === "done") {
+                        if (e.target.id === "done") {
                             let archiveBtn = document.getElementById(data).childNodes
                             archiveBtn[7].style.visibility = "visible";
                         }
@@ -206,13 +211,14 @@ const DragDropManager = Object.create(null, {
                         archiveBtn[7].style.visibility = "hidden";
                         e.target.parentNode.appendChild(document.getElementById(data));
                         manager.database[whichCard].location = e.target.parentNode.id
+                        console.log(whichCard)
                         manager.save()
                         if (e.target.parentNode.id === "done") {
                             let archiveBtn = document.getElementById(data).childNodes
                             archiveBtn[7].style.visibility = "visible";
                         }
                     }
-                    else if (targetDiv.id === "to-do" || e.target.parentNode.id === "to-do") {
+                    else if (e.target.id === "to-do" || e.target.parentNode.id === "to-do") {
                         notie.alert({ type: "warning", text: "Error: You cannot drag items into To Do" })
                     }
                 }
