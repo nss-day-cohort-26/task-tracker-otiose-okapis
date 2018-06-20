@@ -57,6 +57,7 @@ const manager = {
 
     createNewCategory: function (category) {
         let exists = false;
+        console.log(this.database.categories);
         this.database.categories.forEach(element => {
             if (element === category) {
                 exists = true;
@@ -78,7 +79,7 @@ const manager = {
             const localStorageDB = {
                 categories: ["test1", "test2", "test3"]
             }
-            return localStorageDB
+            manager.database = localStorageDB;
         }
         else {
             let existingDB = localStorage.getItem("localStorageDB")
