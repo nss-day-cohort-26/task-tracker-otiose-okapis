@@ -66,7 +66,7 @@ const manager = {
         let exists = false;
         console.log(this.database.categories);
         this.database.categories.forEach(element => {
-            if (element === category) {
+            if (element.toUpperCase() === category.toUpperCase()) {
                 exists = true;
             }
         });
