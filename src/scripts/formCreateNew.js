@@ -1,6 +1,5 @@
 const moment = require("../node_modules/moment");
 const manager = require("./manager");
-const main = require("./main")
 
 // SUBMISSION ROUTINES
 
