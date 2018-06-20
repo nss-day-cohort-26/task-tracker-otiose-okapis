@@ -16,6 +16,7 @@ const createNewCategory = (e) => {
         let option = document.createElement("option");
         option.text = newCat.value;
         categoryInput.add(option);
+        newCat.value = "";
         notie.alert({ type: "success", text: "New Category added successfully" })
     }
 }
