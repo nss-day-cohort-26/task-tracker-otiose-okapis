@@ -35,7 +35,6 @@ const testFormSubmission = (e) => {
         } else {
             submissionResponse.className = "failure";
             submissionResponse.textContent = msg;
-           
         }
     }
 
