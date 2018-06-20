@@ -11,7 +11,8 @@ const manager = {
     },
 
     placeTask: function (card) {
-        // console.log(`.${card.location}`)
+
+        console.log(`.${card.location}`)
         const column = document.querySelector(`.${card.location}`);
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("draggable", true)
@@ -38,7 +39,7 @@ const manager = {
         archiveBtn.setAttribute("id", "archiveBtn");
         archiveBtn.textContent = "Archive";
         archiveBtn.style.visibility = "hidden";
-        archiveBtn.addEventListener("click", () => {this.archive(event.target.parentNode)})
+        archiveBtn.addEventListener("click", () => { this.archive(event.target.parentNode) })
         cardDiv.appendChild(archiveBtn);
         cardDiv.classList.add("task-card");
         column.appendChild(cardDiv);
@@ -78,7 +79,7 @@ const manager = {
         let exists = false;
         console.log(this.database.categories);
         this.database.categories.forEach(element => {
-            if (element === category) {
+            if (element.toUpperCase() === category.toUpperCase()) {
                 exists = true;
             }
         });
@@ -86,7 +87,7 @@ const manager = {
             this.database.categories.push(category);
             return true;
         } else {
-            notie.alert({ type: "warning", text: "Category Already Exists"});
+            notie.alert({ type: "warning", text: "Category Already Exists" });
             return false;
         }
     },
@@ -94,7 +95,9 @@ const manager = {
     load: function () {
 
         const localContactDB = localStorage.getItem("localStorageDB")
+
         // console.log("null or nay", localStorage.getItem("localStorageDB") )
+
         if (localContactDB === null) {
             const localStorageDB = {
                 categories: ["To-do"]
@@ -118,12 +121,13 @@ const manager = {
             let cardDiv = document.getElementsByClassName("task-card")
             // console.log(cardDiv)
 
-            }
-            let theDatabase = manager.database
-            const dataString = JSON.stringify(theDatabase)
-            localStorage.setItem("localStorageDB", dataString)
-        },
-    archive: function(cardName){
+
+        }
+        let theDatabase = manager.database
+        const dataString = JSON.stringify(theDatabase)
+        localStorage.setItem("localStorageDB", dataString)
+    },
+    archive: function (cardName) {
         manager.database[cardName.dataset.name].archive = true
         manager.save();
         cardName.remove();
@@ -185,10 +189,7 @@ const DragDropManager = Object.create(null, {
                     let targetDiv = document.getElementById(e.target.id);
                     // console.log("am i a card", e);
                     let todoDiv = document.querySelector(".to-do")
-                    if (targetDiv === null) {
-                        targetDiv.parentNode.appendChild(document.getElementById(data));
-                        // console.log(target)
-                    }
+
                     if (targetDiv.id === "doing" || targetDiv.id === "done") {
                         let archiveBtn = document.getElementById(data).childNodes
                         archiveBtn[7].style.visibility = "hidden";
@@ -199,7 +200,19 @@ const DragDropManager = Object.create(null, {
                             let archiveBtn = document.getElementById(data).childNodes
                             archiveBtn[7].style.visibility = "visible";
                         }
-                    } else if (targetDiv.id === "to-do") {
+                    }
+                    if (e.target.parentNode.id === "doing" || e.target.parentNode.id === "done") {
+                        let archiveBtn = document.getElementById(data).childNodes
+                        archiveBtn[7].style.visibility = "hidden";
+                        e.target.parentNode.appendChild(document.getElementById(data));
+                        manager.database[whichCard].location = e.target.parentNode.id
+                        manager.save()
+                        if (e.target.parentNode.id === "done") {
+                            let archiveBtn = document.getElementById(data).childNodes
+                            archiveBtn[7].style.visibility = "visible";
+                        }
+                    }
+                    else if (targetDiv.id === "to-do" || e.target.parentNode.id === "to-do") {
                         notie.alert({ type: "warning", text: "Error: You cannot drag items into To Do" })
                     }
                 }
@@ -208,4 +221,3 @@ const DragDropManager = Object.create(null, {
     },
 })
 module.exports = manager
-
