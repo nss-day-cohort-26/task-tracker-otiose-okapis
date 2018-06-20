@@ -1,5 +1,6 @@
 const moment = require("../node_modules/moment");
 const manager = require("./manager");
+const main = require("./main")
 
 // SUBMISSION ROUTINES
 
@@ -8,14 +9,15 @@ const createNewCategory = (e) => {
     // add to database
     e.preventDefault();
     newCat = document.getElementById("newCategoryInput");
-    manager.createNewCategory(newCat.value);
-    manager.save();
+    if (manager.createNewCategory(newCat.value)) {
+        manager.save();
 
-    // add to dropdown
-    const categoryInput = document.getElementById("categoryInput");
-    let option = document.createElement("option");
-    option.text = newCat.value;
-    categoryInput.add(option);
+        // add to dropdown
+        const categoryInput = document.getElementById("categoryInput");
+        let option = document.createElement("option");
+        option.text = newCat.value;
+        categoryInput.add(option);
+    }
 }
 
 // Test Then Create New Task
@@ -40,45 +42,45 @@ const testFormSubmission = (e) => {
 
     const nameIsValid = (name) => {
         if (name.value === "") {
-            //name.style.backgroundColor = "red";
-            //setResponse(false, "Please fill out all fields");
+            name.style.backgroundColor = "red";
+            setResponse(false, "Please fill out all fields");
             return false;
         } else {
-            //name.style.backgroundColor = "whitesmoke";
-            //setResponse(true)
+            name.style.backgroundColor = "whitesmoke";
+            setResponse(true)
             return true;
         }
     }
 
     const descriptionIsValid = (description) => {
         if (description.value === "") {
-            //description.style.backgroundColor = "red";
-            //setResponse(false, "Please fill out all fields");
+            description.style.backgroundColor = "red";
+            setResponse(false, "Please fill out all fields");
             return false;
         } else {
-            //description.style.backgroundColor = "whitesmoke";
+            description.style.backgroundColor = "whitesmoke";
             return true;
         }
     }
 
     const dueDateIsValid = (dueDate) => {
         if (dueDate.value === "") {
-            //dueDate.style.backgroundColor = "red";
-            //setResponse(false, "Please fill out all fields");
+            dueDate.style.backgroundColor = "red";
+            setResponse(false, "Please fill out all fields");
             return false;
         } else {
-            //dueDate.style.backgroundColor = "whitesmoke";
+            dueDate.style.backgroundColor = "whitesmoke";
             return true;
         }
     }
 
     const categoryIsValid = (category) => {
         if (category.value === "") {
-            //category.style.backgroundColor = "red";
-            //setResponse(false, "Please fill out all fields");
+            category.style.backgroundColor = "red";
+            setResponse(false, "Please fill out all fields");
             return false;
         } else {
-            //category.style.backgroundColor = "whitesmoke";
+            category.style.backgroundColor = "whitesmoke";
             return true;
         }
     }
@@ -137,12 +139,13 @@ const refreshCategories = (select) => {
     }
 
     // load from database
-    //manager.load();
+    manager.load();
     const database = manager.database;
     for (i = 0; i < database.categories.length; i++) {
         let option = document.createElement("option");
         option.text = manager.database.categories[i];
         select.add(option);
+        console.log(select);
     }
 
 }
@@ -157,7 +160,7 @@ const createHeaderDiv = () => {
     headerDiv.appendChild(formHeader);
 
     // add close button
-    const closeSpan = buildElement("h4","closeSpan","close clearfix");
+    const closeSpan = buildElement("h4", "closeSpan", "close clearfix");
     closeSpan.textContent = "Close Window";
     // When the user clicks on <span> (x), close the modal
     closeSpan.onclick = function () {
@@ -196,7 +199,7 @@ const createInputDiv = (itemName, itemPrintName) => {
     }
     if (itemName === "category") {
 
-        const newCategoryDiv = buildElement("div","newCategoryDiv");
+        const newCategoryDiv = buildElement("div", "newCategoryDiv");
 
         const select = buildElement("select", (itemName + "Input"), "input");
         refreshCategories(select); // load categories from db and populate select options
@@ -241,7 +244,7 @@ const buildForm = () => {
     const headerDiv = createHeaderDiv();
 
     //create form to hold user inputs
-    const inputsForm = buildElement("form","inputsForm");
+    const inputsForm = buildElement("form", "inputsForm");
 
     //create label/input pairs for NAME, DESCRIPTION, DUEDATE, CATEGORY and append to form
     const inputDivs = [
@@ -277,6 +280,6 @@ document.getElementById("modal-form").appendChild(taskModal);
 // select button in DOM for triggering show modal form
 const btn = document.getElementById("create-task-button");
 // add event to button that makes modal form appear on click
-btn.addEventListener("click", function(){
+btn.addEventListener("click", function () {
     taskModal.style.display = "block";
 });

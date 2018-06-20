@@ -65,9 +65,9 @@ const manager = {
         });
         if (exists === false) {
             this.database.categories.push(category);
-        }
-        else {
-            alert("There is a problem");
+            return true;
+        } else {
+            return false;
         }
     },
 
