@@ -35,7 +35,7 @@ const manager = {
         let archiveBtn = document.createElement("button");
         archiveBtn.textContent = "Archive";
         archiveBtn.style.visibility = "hidden";
-        archiveBtn.addEventListener("click", this.archive)
+        archiveBtn.addEventListener("click", () => {this.archive(event.target.parentNode)})
         cardDiv.appendChild(archiveBtn);
         cardDiv.classList.add("task-card");
         column.appendChild(cardDiv);
@@ -111,8 +111,11 @@ const manager = {
             const dataString = JSON.stringify(theDatabase)
             localStorage.setItem("localStorageDB", dataString)
         },
-    archive: function(){
-        this.parentNode.remove();
+    archive: function(cardName){
+        manager.database[cardName.dataset.name].archive = true
+        manager.save();
+        cardName.remove();
+
 
     }
 };

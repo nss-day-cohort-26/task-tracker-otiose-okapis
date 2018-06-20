@@ -1,6 +1,8 @@
 const manager = require("./manager");
+const viewArchive = require("./viewArchive")
 console.log("RELOAD")
 manager.load();
+viewArchive();
 
 console.log(manager.database)
 
