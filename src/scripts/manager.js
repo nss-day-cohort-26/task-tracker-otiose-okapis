@@ -19,7 +19,8 @@ const manager = {
         cardDiv.setAttribute("id", card.name + card.describe);
         const name = card.name.replace(" ", "");
         console.log("name test", name);
-        cardDiv.setAttribute("data-name", name);
+        cardDiv.setAttribute("data-name", card.name);
+        cardDiv.setAttribute("data-name2", name);
         const nameText = document.createElement("h3")
         nameText.textContent = card.name;
         cardDiv.appendChild(nameText);
@@ -143,7 +144,7 @@ function timeOutM(taskM) {
     console.log(taskM);
     const taskN = manager.database[`${taskM}`].name;
     const queryN = taskN.replace(" ", "");
-    const cardT = document.querySelector(`[data-name = ${queryN}]`)
+    const cardT = document.querySelector(`[data-name2 = ${queryN}]`)
     const overDue = document.createElement("h5");
     overDue.setAttribute("id", "overDue");
     overDue.textContent = "THIS TASK IS OVERDUE"
