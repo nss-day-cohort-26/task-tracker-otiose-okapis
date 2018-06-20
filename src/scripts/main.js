@@ -8,7 +8,7 @@ function timeOut(taskM){
     const taskN = manager.database[`${taskM}`].name;
     const queryN = taskN.replace(" ", "");
 
-    const cardT = document.querySelector(`[data-name = ${queryN}]`)
+    const cardT = document.querySelector(`[data-name2 = ${queryN}]`)
     const overDue = document.createElement("h5");
     overDue.setAttribute("id", "overDue");
     overDue.textContent = "THIS TASK IS OVERDUE"
@@ -24,7 +24,7 @@ for (task in manager.database){
         const taskN = manager.database[`${task}`].name;
         const queryN = taskN.replace(" ", "");
         console.log("queryN", queryN);
-        const card = $("[data-name = " + queryN + "]");
+        const card = $("[data-name2 = " + queryN + "]");
         console.log(manager.database);
         // console.log("cardTest", cardTest[0]);
         // const card = document.querySelector(`[data-name = ${taskN}]`)

@@ -166,6 +166,7 @@ const createHeaderDiv = () => {
     // When the user clicks on <span> (x), close the modal
     closeSpan.onclick = function () {
         taskModal.style.display = "none";
+        // taskModal.style.height = "0px";
         resetForm();
     }
     headerDiv.appendChild(closeSpan);
@@ -283,4 +284,5 @@ const btn = document.getElementById("create-task-button");
 // add event to button that makes modal form appear on click
 btn.addEventListener("click", function () {
     taskModal.style.display = "block";
+    // taskModal.style.height = "100px";
 });
