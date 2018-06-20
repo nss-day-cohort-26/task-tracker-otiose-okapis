@@ -34,6 +34,7 @@ const manager = {
         let archiveBtn = document.createElement("button");
         archiveBtn.textContent = "Archive";
         archiveBtn.style.visibility = "hidden";
+        archiveBtn.addEventListener("click", this.archive)
         cardDiv.appendChild(archiveBtn);
         cardDiv.classList.add("task-card");
         column.appendChild(cardDiv);
@@ -97,7 +98,11 @@ const manager = {
             let theDatabase = manager.database
             const dataString = JSON.stringify(theDatabase)
             localStorage.setItem("localStorageDB", dataString)
-        }
+        },
+    archive: function(){
+        this.parentNode.style.visibility = "hidden"
+        this.style.visibility = "hidden"
+    }
 };
 Object.defineProperty(manager.database, "categories", {
     enumerable: false
