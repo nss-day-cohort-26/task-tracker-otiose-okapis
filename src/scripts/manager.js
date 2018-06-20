@@ -36,7 +36,7 @@ const manager = {
         archiveBtn.setAttribute("id", "archiveBtn");
         archiveBtn.textContent = "Archive";
         archiveBtn.style.visibility = "hidden";
-        archiveBtn.addEventListener("click", this.archive)
+        archiveBtn.addEventListener("click", () => {this.archive(event.target.parentNode)})
         cardDiv.appendChild(archiveBtn);
         cardDiv.classList.add("task-card");
         column.appendChild(cardDiv);
@@ -74,6 +74,7 @@ const manager = {
 
     createNewCategory: function (category) {
         let exists = false;
+        console.log(this.database.categories);
         this.database.categories.forEach(element => {
             if (element === category) {
                 exists = true;
@@ -81,9 +82,10 @@ const manager = {
         });
         if (exists === false) {
             this.database.categories.push(category);
-        }
-        else {
-            alert("There is a problem");
+            return true;
+        } else {
+            notie.alert({ type: "warning", text: "Category Already Exists"});
+            return false;
         }
     },
 
@@ -93,9 +95,9 @@ const manager = {
         // console.log("null or nay", localStorage.getItem("localStorageDB") )
         if (localContactDB === null) {
             const localStorageDB = {
-                categories: ["test1", "test2", "test3"],
+                categories: ["To-do"]
             }
-            return localStorageDB
+            manager.database = localStorageDB;
         }
         else {
             let existingDB = localStorage.getItem("localStorageDB")
@@ -114,13 +116,16 @@ const manager = {
             let cardDiv = document.getElementsByClassName("task-card")
             // console.log(cardDiv)
 
-        }
-        let theDatabase = manager.database
-        const dataString = JSON.stringify(theDatabase)
-        localStorage.setItem("localStorageDB", dataString)
-    },
-    archive: function () {
-        this.parentNode.remove();
+            }
+            let theDatabase = manager.database
+            const dataString = JSON.stringify(theDatabase)
+            localStorage.setItem("localStorageDB", dataString)
+        },
+    archive: function(cardName){
+        manager.database[cardName.dataset.name].archive = true
+        manager.save();
+        cardName.remove();
+
 
     }
 };

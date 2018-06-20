@@ -1,5 +1,7 @@
 const manager = require("./manager");
+const viewArchive = require("./viewArchive")
 manager.load();
+viewArchive();
 
 console.log(manager.database)
 function timeOut(taskM){
