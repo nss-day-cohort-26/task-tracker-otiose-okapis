@@ -6,7 +6,9 @@ viewArchive();
 console.log(manager.database)
 function timeOut(taskM){
     const taskN = manager.database[`${taskM}`].name;
-    const cardT = document.querySelector(`[data-name = ${taskN}]`)
+    const queryN = taskN.replace(" ", "");
+
+    const cardT = document.querySelector(`[data-name = ${queryN}]`)
     const overDue = document.createElement("h5");
     overDue.setAttribute("id", "overDue");
     overDue.textContent = "THIS TASK IS OVERDUE"
@@ -20,17 +22,19 @@ for (task in manager.database){
         const checkNow = Date.now();
         const checkDue = new Date(manager.database[`${task}`].due);
         const taskN = manager.database[`${task}`].name;
-        const card = document.querySelector(`[data-name = ${taskN}]`)
+        const queryN = taskN.replace(" ", "");
+        console.log("queryN", queryN);
+        const card = $("[data-name = " + queryN + "]");
+        console.log(manager.database);
+        // console.log("cardTest", cardTest[0]);
+        // const card = document.querySelector(`[data-name = ${taskN}]`)
+        // console.log("actual card", card);
 
         if (checkNow >= checkDue){
             timeOut(taskN);
-            // const overDue = document.createElement("h5");
-            // overDue.setAttribute("id", "overDue");
-            // overDue.textContent = "THIS TASK IS OVERDUE"
-            // card.appendChild(overDue);
+
         } else{
-            // setTimeout(timeOut(card), )
-            // console.log("timing check", checkDue - checkNow);
+
             const lateTime = checkDue - checkNow;
             setTimeout(taskN => { timeOut(taskN)}, lateTime);
         }

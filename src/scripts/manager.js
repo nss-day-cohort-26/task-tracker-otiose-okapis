@@ -16,7 +16,9 @@ const manager = {
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("draggable", true)
         cardDiv.setAttribute("id", card.name + card.describe);
-        cardDiv.setAttribute("data-name", card.name)
+        const name = card.name.replace(" ", "");
+        console.log("name test", name);
+        cardDiv.setAttribute("data-name", name);
         const nameText = document.createElement("h3")
         nameText.textContent = card.name;
         cardDiv.appendChild(nameText);
@@ -136,7 +138,8 @@ Object.defineProperty(manager.database, "categories", {
 function timeOutM(taskM) {
     console.log(taskM);
     const taskN = manager.database[`${taskM}`].name;
-    const cardT = document.querySelector(`[data-name = ${taskN}]`)
+    const queryN = taskN.replace(" ", "");
+    const cardT = document.querySelector(`[data-name = ${queryN}]`)
     const overDue = document.createElement("h5");
     overDue.setAttribute("id", "overDue");
     overDue.textContent = "THIS TASK IS OVERDUE"
