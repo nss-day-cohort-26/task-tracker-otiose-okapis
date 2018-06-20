@@ -64,6 +64,7 @@ const manager = {
 
     createNewCategory: function (category) {
         let exists = false;
+        console.log(this.database.categories);
         this.database.categories.forEach(element => {
             if (element === category) {
                 exists = true;
@@ -71,9 +72,9 @@ const manager = {
         });
         if (exists === false) {
             this.database.categories.push(category);
-        }
-        else {
-            alert("There is a problem");
+            return true;
+        } else {
+            return false;
         }
     },
 
@@ -83,9 +84,9 @@ const manager = {
         console.log("null or nay", localStorage.getItem("localStorageDB") )
         if (localContactDB === null) {
             const localStorageDB = {
-                categories: ["test1", "test2", "test3"],
+                categories: ["test1", "test2", "test3"]
             }
-            return localStorageDB
+            manager.database = localStorageDB;
         }
         else {
             let existingDB = localStorage.getItem("localStorageDB")

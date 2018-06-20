@@ -1,203 +1,34 @@
 const moment = require("../node_modules/moment");
 const manager = require("./manager");
 
-// functions called in this script for creating modal form elements
-const buildElement = (type, id, className, display) => {
-    const element = document.createElement(type);
-    element.id = id;
-    element.className = className;
-    if (display) {
-        element.style.display = display;
-    }
-    return element;
-}
+// SUBMISSION ROUTINES
 
-//create main modal div
-const taskModal = buildElement("div", "taskModal", "modal", "none");
-
-//create header div
-const headerDiv = buildElement("div", "headerDiv", "header");
-
-// create div for form content
-const formContent = buildElement("div", "formContent", "modal-content");
-
-// add h1 to header div
-const formHeader = buildElement("h2", "formHeader", "header-title");
-formHeader.textContent = "Create New Task";
-headerDiv.appendChild(formHeader);
-
-const closeSpan = document.createElement("H4");
-closeSpan.id = "closeSpan";
-closeSpan.className = "close clearfix";
-closeSpan.onclick = function () {
-    modal.style.display = "none";
-}
-closeSpan.textContent = "Close Window";
-
-// When the user clicks on <span> (x), close the modal
-closeSpan.onclick = function () {
-    taskModal.style.display = "none";
-}
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target === taskModal) {
-        taskModal.style.display = "none";
-    }
-}
-headerDiv.appendChild(closeSpan);
-
-//create form to hold user inputs
-const inputsForm = document.createElement("form");
-
-// function response to create new category click
+// Create New Category
 const createNewCategory = (e) => {
+    // add to database
     e.preventDefault();
-    const categories = manager.database.categories;
     newCat = document.getElementById("newCategoryInput");
-    categories.push(newCat.value);
+    if (manager.createNewCategory(newCat.value)) {
+        manager.save();
 
-    const categoryInput = document.getElementById("categoryInput");
-    let option = document.createElement("option");
-    option.text = newCat.value;
-    categoryInput.add(option);
-    newCat.value = "";
-    manager.save();
+        // add to dropdown
+        const categoryInput = document.getElementById("categoryInput");
+        let option = document.createElement("option");
+        option.text = newCat.value;
+        categoryInput.add(option);
+    }
 }
 
-//function for creating label/input divs
-const createInputDiv = (itemName, itemPrintName) => {
-
-    console.log("find manager", manager.database);
-    const categories = manager.database.categories;
-    const newDiv = document.createElement("div");
-    newDiv.className = "inputDiv";
-    newDiv.id = itemName + "Div";
-    const label = document.createElement("span");
-    label.id = (itemName + "Label");
-    label.textContent = (itemPrintName + ":");
-    label.className = "label";
-    const input = document.createElement("input");
-    input.id = (itemName + "Input");
-    input.className = "input";
-    newDiv.appendChild(label);
-    newDiv.appendChild(input);
-    if (itemName === "dueDate") {
-        input.setAttribute("type", "datetime-local");
-        input.value = moment().format("YYYY-MM-DD") + "T23:59";
-    } else {
-        input.value = "Default";
-    };
-
-    // if (itemName === "name" || itemName === "dueDate") {
-    //     const input = document.createElement("input");
-    //     input.id = (itemName + "Input");
-    //     input.className = "input";
-    //     if (itemName === "dueDate"){
-    //         input.setAttribute("type", "date");
-    //     }
-    //     newDiv.appendChild(label);
-    //     newDiv.appendChild(input);
-
-    // } if (itemName === "description") {
-    //     const input = document.createElement("textarea");
-    //     input.id = (itemName + "Input");
-    //     input.className = "input";
-    //     newDiv.appendChild(label);
-    //     newDiv.appendChild(input);
-    // } else if (itemName === "category") {
-
-    //     const newCategoryDiv = document.createElement("div");
-    //     newCategoryDiv.id = "newCategoryDiv";
-    //     const select = document.createElement("select");
-    //     select.id = (itemName + "Input");
-    //     select.className = "input";
-
-    //     categories.forEach(category => {
-    //         let option = document.createElement("option");
-    //         option.text = category;
-    //         select.add(option);
-    //     })
-
-    //     const newCategoryButton = document.createElement("button");
-    //     newCategoryButton.id = "newCategoryButton";
-    //     newCategoryButton.textContent = "Create New";
-    //     const newCategoryInput = document.createElement("input");
-    //     newCategoryInput.id = "newCategoryInput";
-
-    //     newCategoryDiv.appendChild(select);
-    //     newCategoryDiv.appendChild(newCategoryButton);
-    //     newCategoryDiv.appendChild(newCategoryInput);
-
-    //     newDiv.appendChild(label);
-    //     newDiv.appendChild(newCategoryDiv);
-
-    // }
-    return newDiv;
-};
-
-//create label/input pairs for NAME, DESCRIPTION, DUEDATE, CATEGORY
-const inputDivs = [
-    ["name", "Name"],
-    ["description", "Description"],
-    ["dueDate", "Due Date"],
-    ["category", "Category"]
-]
-for (let i = 0; i < inputDivs.length; i++) {
-    inputsForm.appendChild(createInputDiv(inputDivs[i][0], inputDivs[i][1]));
-}
-
-//attach submit button to input form
-
-const submitButtonDiv = document.createElement("div");
-submitButtonDiv.id = "submitButtonDiv";
-const submissionResponse = document.createElement("div");
-submissionResponse.id = "submissionResponse";
-submissionResponse.textContent = "";
-submissionResponse.className = "";
-const submitButton = document.createElement("button");
-submitButton.textContent = "Submit";
-submitButton.id = "submitButton";
-submitButtonDiv.appendChild(submissionResponse);
-submitButtonDiv.appendChild(submitButton);
-inputsForm.appendChild(submitButtonDiv);
-
-// append form to form content container
-formContent.appendChild(inputsForm);
-
-// append form header and form content to modal
-taskModal.appendChild(headerDiv);
-taskModal.appendChild(formContent);
-
-// append taskModal to target container in index.html
-document.getElementById("modal-form").appendChild(taskModal);
-
-// select button for triggering show modal form
-const btn = document.getElementById("create-task-button");
-
-// add event to button that makes modal form appear on click
-btn.onclick = function () {
-    // console.log("button test");
-    taskModal.style.display = "block";
-}
-
-const createNewTask = () => {
-    manager.createTask(inputDivs.name.querySelector("input").value, inputDivs.description.querySelector("input").value, inputDivs.dueDate.querySelector("input").value, inputDivs.category.querySelector("input").value);
-    manager.save();
-    event.preventDefault();
-    taskForm.style.display = "none";
-};
-
-
-// FORM SUBMISSION
+// Test Then Create New Task
 const testFormSubmission = (e) => {
-    submissionResponse.textContent = "";
-    submissionResponse.className = "";
+    e.preventDefault();
 
-    const name = inputsForm.querySelector("#nameInput");
-    const description = inputsForm.querySelector("#descriptionInput");
-    const dueDate = inputsForm.querySelector("#dueDateInput");
-    const category = inputsForm.querySelector("#categoryInput");
+    const name = document.getElementById("nameInput");
+    const description = document.getElementById("descriptionInput");
+    const dueDate = document.getElementById("dueDateInput");
+    const category = document.getElementById("categoryInput");
 
+    // Test each field and take actions
     const setResponse = (status, msg) => {
         if (status === true) {
             submissionResponse.className = "success";
@@ -205,11 +36,10 @@ const testFormSubmission = (e) => {
         } else {
             submissionResponse.className = "failure";
             submissionResponse.textContent = msg;
-            e.preventDefault();
         }
     }
 
-    const nameIsValid = () => {
+    const nameIsValid = (name) => {
         if (name.value === "") {
             name.style.backgroundColor = "red";
             setResponse(false, "Please fill out all fields");
@@ -221,7 +51,7 @@ const testFormSubmission = (e) => {
         }
     }
 
-    const descriptionIsValid = () => {
+    const descriptionIsValid = (description) => {
         if (description.value === "") {
             description.style.backgroundColor = "red";
             setResponse(false, "Please fill out all fields");
@@ -232,7 +62,7 @@ const testFormSubmission = (e) => {
         }
     }
 
-    const dueDateIsValid = () => {
+    const dueDateIsValid = (dueDate) => {
         if (dueDate.value === "") {
             dueDate.style.backgroundColor = "red";
             setResponse(false, "Please fill out all fields");
@@ -243,7 +73,7 @@ const testFormSubmission = (e) => {
         }
     }
 
-    const categoryIsValid = () => {
+    const categoryIsValid = (category) => {
         if (category.value === "") {
             category.style.backgroundColor = "red";
             setResponse(false, "Please fill out all fields");
@@ -254,38 +84,201 @@ const testFormSubmission = (e) => {
         }
     }
 
-    //execute all tests to innact side effects
-    const formValid = [nameIsValid(), descriptionIsValid(), dueDateIsValid(), categoryIsValid()]
+    //execute all tests to innact side effects and build TRUTH ARRAY
+    const formValid = [nameIsValid(name), descriptionIsValid(description), dueDateIsValid(dueDate), categoryIsValid(category)]
 
-    //if the form is complete >> show complete >> pause >> submit form
+    //SUCESS ROUTINE
     if (formValid[0] && formValid[1] && formValid[2] && formValid[3]) {
         setResponse(true);
-        setTimeout(function () { console.log("success"); }, 5000);
         e.preventDefault();
-        const ins = document.querySelectorAll("input")
-        manager.createTask(ins[0].value, ins[1].value, ins[2].value, ins[3].value);
+        manager.createTask(name.value, description.value, dueDate.value, category.value);
         // console.log(manager);
         manager.save();
-        ins.forEach(input => {
-            input.value = "";
-            if (input.type === "datetime-local") {
-                input.value = moment().format("YYYY-MM-DD") + "T23:59";
-
-            }
-        })
         taskModal.style.display = "none";
+    }
+}
 
+// CLEAR FORM inputs when closed
+const resetForm = () => {
+    const ins = [document.getElementById("nameInput"), document.getElementById("descriptionInput"), document.getElementById("dueDateInput"), document.getElementById("categoryInput")];
+
+    ins.forEach(input => {
+        input.value = "";
+        if (input.type === "datetime-local") {
+            input.value = moment().format("YYYY-MM-DD") + "T23:59";
+        }
+    })
+
+    const submissionResponse = document.getElementById("submissionResponse");
+    submissionResponse.textContent = "";
+    submissionResponse.className = "";
+}
+
+// DOM WRITING FUNCTIONS
+
+// FOMR PIECE BIULDER for creating modal form elements
+const buildElement = (type, id, className, display) => {
+    const element = document.createElement(type);
+    element.id = id;
+    if (className) {
+        element.className = className;
     }
 
+    if (display) {
+        element.style.display = display;
+    }
+    return element;
+}
+
+// FORM PIECE load categories from database and set category Inputs
+const refreshCategories = (select) => {
+    // clear all options from dropdown
+    for (i = 0; i < select.options.length; i++) {
+        categoryInput.options[i] = null;
+    }
+
+    // load from database
+    manager.load();
+    const database = manager.database;
+    for (i = 0; i < database.categories.length; i++) {
+        let option = document.createElement("option");
+        option.text = manager.database.categories[i];
+        select.add(option);
+        console.log(select);
+    }
 
 }
-submitButton.addEventListener("click", testFormSubmission);
-// newCategoryButton = document.getElementById("newCategoryButton");
-// newCategoryButton.addEventListener("click", createNewCategory);
 
+// FORM PIECE function for creating HEADERDIV
+const createHeaderDiv = () => {
+    const headerDiv = buildElement("div", "headerDiv", "header");
 
+    // add h1 to header div
+    const formHeader = buildElement("h2", "formHeader", "header-title");
+    formHeader.textContent = "Create New Task";
+    headerDiv.appendChild(formHeader);
 
+    // add close button
+    const closeSpan = buildElement("h4", "closeSpan", "close clearfix");
+    closeSpan.textContent = "Close Window";
+    // When the user clicks on <span> (x), close the modal
+    closeSpan.onclick = function () {
+        taskModal.style.display = "none";
+        resetForm();
+    }
+    headerDiv.appendChild(closeSpan);
 
+    return headerDiv;
+}
 
-// attach FORM SUBMISSION routine to submitButton click
+// FORM PIECE function for creating LABEL/INPUT pairs
+const createInputDiv = (itemName, itemPrintName) => {
 
+    const newDiv = document.createElement("div");
+    newDiv.className = "inputDiv";
+    newDiv.id = itemName + "Div";
+    const label = document.createElement("span");
+    label.id = (itemName + "Label");
+    label.textContent = (itemPrintName + ":");
+    label.className = "label";
+    newDiv.appendChild(label);
+
+    if (itemName === "name" || itemName === "dueDate") {
+        const input = buildElement("input", (itemName + "Input"), "input");
+        if (itemName === "dueDate") {
+            input.setAttribute("type", "datetime-local");
+            input.value = moment().format("YYYY-MM-DD") + "T23:59";
+        }
+        newDiv.appendChild(input);
+
+    }
+    if (itemName === "description") {
+        const input = buildElement("textarea", (itemName + "Input"), "input");
+        newDiv.appendChild(input);
+    }
+    if (itemName === "category") {
+
+        const newCategoryDiv = buildElement("div", "newCategoryDiv");
+
+        const select = buildElement("select", (itemName + "Input"), "input");
+        refreshCategories(select); // load categories from db and populate select options
+        const newCategoryButton = buildElement("button", "newCategoryButton");
+        newCategoryButton.textContent = "Create New";
+        newCategoryButton.addEventListener("click", createNewCategory);
+        const newCategoryInput = buildElement("input", "newCategoryInput");
+
+        newCategoryDiv.appendChild(select);
+        newCategoryDiv.appendChild(newCategoryButton);
+        newCategoryDiv.appendChild(newCategoryInput);
+
+        newDiv.appendChild(newCategoryDiv);
+
+    }
+    return newDiv;
+};
+
+// FORM PEICE BUILDER for creating SUBMIT div
+const createSubmitButtonDiv = function () {
+
+    const submitButtonDiv = buildElement("div", "submitButtonDiv");
+
+    const submissionResponse = buildElement("div", "submissionResponse");
+    const submitButton = buildElement("button", "submitButton");
+    submitButton.addEventListener("click", testFormSubmission);
+    submitButton.textContent = "Submit";
+
+    submitButtonDiv.appendChild(submissionResponse);
+    submitButtonDiv.appendChild(submitButton);
+
+    return submitButtonDiv;
+}
+
+// MAIN FORM BUILD FUNCTION
+const buildForm = () => {
+
+    //create main modal div
+    const taskModal = buildElement("div", "taskModal", "modal", "none");
+
+    //create header div
+    const headerDiv = createHeaderDiv();
+
+    //create form to hold user inputs
+    const inputsForm = buildElement("form", "inputsForm");
+
+    //create label/input pairs for NAME, DESCRIPTION, DUEDATE, CATEGORY and append to form
+    const inputDivs = [
+        ["name", "Name"],
+        ["description", "Description"],
+        ["dueDate", "Due Date"],
+        ["category", "Category"]
+    ]
+    for (let i = 0; i < inputDivs.length; i++) {
+        inputsForm.appendChild(createInputDiv(inputDivs[i][0], inputDivs[i][1]));
+    }
+
+    //attach submit button to input form
+    inputsForm.appendChild(createSubmitButtonDiv());
+
+    // create div for form content
+    const formContent = buildElement("div", "formContent", "modal-content");
+    // append form to form content container
+    formContent.appendChild(inputsForm);
+
+    // append form header and form content to modal
+    taskModal.appendChild(headerDiv);
+    taskModal.appendChild(formContent);
+    return taskModal;
+    // append taskModal to target container in index.html
+    //document.getElementById("modal-form").appendChild(taskModal);
+}
+
+/////////////////// BUILD AND ATTACH TO BUTTON ///////////////
+// Build Form
+const taskModal = buildForm();
+document.getElementById("modal-form").appendChild(taskModal);
+// select button in DOM for triggering show modal form
+const btn = document.getElementById("create-task-button");
+// add event to button that makes modal form appear on click
+btn.addEventListener("click", function () {
+    taskModal.style.display = "block";
+});
