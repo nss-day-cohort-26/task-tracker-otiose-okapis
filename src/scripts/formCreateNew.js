@@ -252,7 +252,7 @@ const buildForm = () => {
         ["name", "Name"],
         ["description", "Description"],
         ["dueDate", "Due Date"],
-        ["category", "Category"]
+        ["category", "Category (optional)"]
     ]
     for (let i = 0; i < inputDivs.length; i++) {
         inputsForm.appendChild(createInputDiv(inputDivs[i][0], inputDivs[i][1]));

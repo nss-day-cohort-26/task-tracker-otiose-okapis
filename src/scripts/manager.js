@@ -74,6 +74,7 @@ const manager = {
             this.database.categories.push(category);
             return true;
         } else {
+            notie.alert({ type: "warning", text: "Category Already Exists"});
             return false;
         }
     },
