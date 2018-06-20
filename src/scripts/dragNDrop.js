@@ -32,15 +32,21 @@ const DragDropManager = Object.create(null, {
                     console.log(data)
                     // Append card to target component as child
                     let targetDiv = document.getElementById(e.target.id);
+                    let target = e.target
+                    console.log(target)
                     console.log("am i a card", e);
                     let todoDiv = document.querySelector(".to-do")
-                    if (targetDiv.id === "doing" || targetDiv.id === "done") {
+                    if (targetDiv === null){
+                        targetDiv.parentNode.appendChild(document.getElementById(data));
+                        console.log(target)
+                    }
+                    else if (targetDiv.id === "doing" || targetDiv.id === "done") {
                         targetDiv.appendChild(document.getElementById(data));
                         let archiveBtn = document.getElementById(data).childNodes
                             archiveBtn[7].style.visibility = "hidden"
                         if (targetDiv.id === "done") {
                             let archiveBtn = document.getElementById(data).childNodes
-                            archiveBtn[7].style.visibility = "visible"
+                            archiveBtn[7].style.visibility = "visible";
                         }
                     } else if (targetDiv.id === "to-do") {
                         notie.alert({ type: "warning", text: "Error: You cannot drag items into To Do" })
