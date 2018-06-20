@@ -75,6 +75,9 @@ body {
 
 .archive {
     display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-items: flex-start;
 }
 
 .archive div {
