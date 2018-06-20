@@ -1,6 +1,9 @@
 const moment = require("../node_modules/moment");
 const manager = require("./manager");
 
+const categories = manager.database.categories;
+console.log(categories);
+
 // functions called in this script for creating modal form elements
 const buildElement = (type, id, className, display) => {
     const element = document.createElement(type);
@@ -52,7 +55,6 @@ const inputsForm = document.createElement("form");
 // function response to create new category click
 const createNewCategory = (e) => {
     e.preventDefault();
-    const categories = manager.database.categories;
     newCat = document.getElementById("newCategoryInput");
     categories.push(newCat.value);
 
@@ -67,8 +69,6 @@ const createNewCategory = (e) => {
 //function for creating label/input divs
 const createInputDiv = (itemName, itemPrintName) => {
 
-    console.log("find manager", manager.database);
-    const categories = manager.database.categories;
     const newDiv = document.createElement("div");
     newDiv.className = "inputDiv";
     newDiv.id = itemName + "Div";
@@ -76,62 +76,54 @@ const createInputDiv = (itemName, itemPrintName) => {
     label.id = (itemName + "Label");
     label.textContent = (itemPrintName + ":");
     label.className = "label";
-    const input = document.createElement("input");
-    input.id = (itemName + "Input");
-    input.className = "input";
-    newDiv.appendChild(label);
-    newDiv.appendChild(input);
-    if (itemName === "dueDate") {
-        input.setAttribute("type", "datetime-local");
-        input.value = moment().format("YYYY-MM-DD") + "T23:59";
-    } else {
-        input.value = "Default";
-    };
 
-    // if (itemName === "name" || itemName === "dueDate") {
-    //     const input = document.createElement("input");
-    //     input.id = (itemName + "Input");
-    //     input.className = "input";
-    //     if (itemName === "dueDate"){
-    //         input.setAttribute("type", "date");
-    //     }
-    //     newDiv.appendChild(label);
-    //     newDiv.appendChild(input);
+    if (itemName === "name" || itemName === "dueDate") {
+        const input = document.createElement("input");
+        input.id = (itemName + "Input");
+        input.className = "input";
+        if (itemName === "dueDate"){
+            input.setAttribute("type", "datetime-local");
+            input.value = moment().format("YYYY-MM-DD") + "T23:59";
+        }
+        newDiv.appendChild(label);
+        newDiv.appendChild(input);
 
-    // } if (itemName === "description") {
-    //     const input = document.createElement("textarea");
-    //     input.id = (itemName + "Input");
-    //     input.className = "input";
-    //     newDiv.appendChild(label);
-    //     newDiv.appendChild(input);
-    // } else if (itemName === "category") {
+    }
+    if (itemName === "description") {
+        const input = document.createElement("textarea");
+        input.id = (itemName + "Input");
+        input.className = "input";
+        newDiv.appendChild(label);
+        newDiv.appendChild(input);
+    }
+    if (itemName === "category") {
 
-    //     const newCategoryDiv = document.createElement("div");
-    //     newCategoryDiv.id = "newCategoryDiv";
-    //     const select = document.createElement("select");
-    //     select.id = (itemName + "Input");
-    //     select.className = "input";
+        const newCategoryDiv = document.createElement("div");
+        newCategoryDiv.id = "newCategoryDiv";
+        const select = document.createElement("select");
+        select.id = (itemName + "Input");
+        select.className = "input";
 
-    //     categories.forEach(category => {
-    //         let option = document.createElement("option");
-    //         option.text = category;
-    //         select.add(option);
-    //     })
+        categories.forEach(category => {
+            let option = document.createElement("option");
+            option.text = category;
+            select.add(option);
+        })
 
-    //     const newCategoryButton = document.createElement("button");
-    //     newCategoryButton.id = "newCategoryButton";
-    //     newCategoryButton.textContent = "Create New";
-    //     const newCategoryInput = document.createElement("input");
-    //     newCategoryInput.id = "newCategoryInput";
+        const newCategoryButton = document.createElement("button");
+        newCategoryButton.id = "newCategoryButton";
+        newCategoryButton.textContent = "Create New";
+        const newCategoryInput = document.createElement("input");
+        newCategoryInput.id = "newCategoryInput";
 
-    //     newCategoryDiv.appendChild(select);
-    //     newCategoryDiv.appendChild(newCategoryButton);
-    //     newCategoryDiv.appendChild(newCategoryInput);
+        newCategoryDiv.appendChild(select);
+        newCategoryDiv.appendChild(newCategoryButton);
+        newCategoryDiv.appendChild(newCategoryInput);
 
-    //     newDiv.appendChild(label);
-    //     newDiv.appendChild(newCategoryDiv);
+        newDiv.appendChild(label);
+        newDiv.appendChild(newCategoryDiv);
 
-    // }
+    }
     return newDiv;
 };
 
@@ -260,10 +252,8 @@ const testFormSubmission = (e) => {
     //if the form is complete >> show complete >> pause >> submit form
     if (formValid[0] && formValid[1] && formValid[2] && formValid[3]) {
         setResponse(true);
-        setTimeout(function () { console.log("success"); }, 5000);
         e.preventDefault();
-        const ins = document.querySelectorAll("input")
-        manager.createTask(ins[0].value, ins[1].value, ins[2].value, ins[3].value);
+        manager.createTask(name.value, description.value, dueDate.value, category.value);
         // console.log(manager);
         manager.save();
         ins.forEach(input => {
@@ -279,6 +269,7 @@ const testFormSubmission = (e) => {
 
 
 }
+
 submitButton.addEventListener("click", testFormSubmission);
 // newCategoryButton = document.getElementById("newCategoryButton");
 // newCategoryButton.addEventListener("click", createNewCategory);
