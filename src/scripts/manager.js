@@ -100,8 +100,8 @@ const manager = {
             localStorage.setItem("localStorageDB", dataString)
         },
     archive: function(){
-        this.parentNode.style.visibility = "hidden"
-        this.style.visibility = "hidden"
+        this.parentNode.remove();
+
     }
 };
 Object.defineProperty(manager.database, "categories", {
