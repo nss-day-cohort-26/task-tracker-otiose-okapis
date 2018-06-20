@@ -157,10 +157,20 @@ const DragDropManager = Object.create(null, {
                     let targetDiv = document.getElementById(e.target.id);
                     // console.log("am i a card", e);
                     let todoDiv = document.querySelector(".to-do")
+                    if (targetDiv === null){
+                        targetDiv.parentNode.appendChild(document.getElementById(data));
+                        console.log(target)
+                    }
                     if (targetDiv.id === "doing" || targetDiv.id === "done") {
+                        let archiveBtn = document.getElementById(data).childNodes
+                        archiveBtn[7].style.visibility = "hidden";
                         targetDiv.appendChild(document.getElementById(data));
                         manager.database[whichCard].location = e.target.id
                         manager.save()
+                        if (targetDiv.id === "done") {
+                            let archiveBtn = document.getElementById(data).childNodes
+                            archiveBtn[7].style.visibility = "visible";
+                        }
                     } else if (targetDiv.id === "to-do") {
                         notie.alert({ type: "warning", text: "Error: You cannot drag items into To Do" })
                     }
