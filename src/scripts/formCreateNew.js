@@ -1,6 +1,6 @@
 const moment = require("../node_modules/moment");
 const manager = require("./manager");
-const testWhatisDiff = null;
+
 // SUBMISSION ROUTINES
 
 // Create New Category
