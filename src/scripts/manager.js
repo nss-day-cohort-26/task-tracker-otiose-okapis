@@ -74,6 +74,7 @@ const manager = {
             this.database.categories.push(category);
             return true;
         } else {
+            notie.alert({ type: "warning", text: "Category Already Exists"});
             return false;
         }
     },
@@ -84,7 +85,7 @@ const manager = {
         console.log("null or nay", localStorage.getItem("localStorageDB") )
         if (localContactDB === null) {
             const localStorageDB = {
-                categories: ["test1", "test2", "test3"]
+                categories: ["To-Do"]
             }
             manager.database = localStorageDB;
         }
