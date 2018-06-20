@@ -1,7 +1,7 @@
 const Task = require("./task");
 const Load = require("./queryStorage");
 const Save = require("./setStorage");
-const Drag = require("./dragNDrop")
+// const Drag = require("./dragNDrop")
 // console.log(Save);
 
 
@@ -16,6 +16,7 @@ const manager = {
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("draggable", true)
         cardDiv.setAttribute("id", card.name + card.describe);
+        cardDiv.setAttribute("data-name", card.name)
         const nameText = document.createElement("h3")
         nameText.textContent = card.name;
         cardDiv.appendChild(nameText);
@@ -32,7 +33,7 @@ const manager = {
         cardDiv.appendChild(dueText);
         cardDiv.classList.add("task-card");
         column.appendChild(cardDiv);
-        Drag.init();
+        DragDropManager.init();
     },
 
     createTask: function (taskName, description, dueDate, category = "") {
@@ -89,6 +90,15 @@ const manager = {
     },
 
     save: function(){
+            const toDoDiv = document.getElementById("to-do").childNodes
+            const doingDiv = document.getElementById("doing").childNodes
+            const doneDiv = document.getElementById("done").childNodes
+            let divArray = [toDoDiv, doingDiv, doneDiv]
+            for (let div in divArray){
+                let cardDiv = document.getElementsByClassName("task-card")
+                console.log(cardDiv)
+
+            }
             let theDatabase = manager.database
             const dataString = JSON.stringify(theDatabase)
             localStorage.setItem("localStorageDB", dataString)
@@ -98,17 +108,56 @@ Object.defineProperty(manager.database, "categories", {
     enumerable: false
 });
 
-// manager.createTask("test", "testing", "someday", "none");
+/////////////-------------------------------------------------------Drag N Drop Manager-----------------------------///////////////////
 
-// console.log("saving test start", manager.database);
-// manager.save();
-// manager.createTask("test222", "testing32", "someday32", "none23");
-// console.log(manager.database);
-// manager.load();
-// console.log("final", manager.database);
+const DragDropManager = Object.create(null, {
+    init: {
+        value: () => {
+            const stages = document.querySelectorAll(".task-card");
+            let whichCard = ""
+            console.log(stages)
+            stages.forEach(stage => {
+                // Gain reference of item being dragged
+                stage.ondragstart = e => {
+                    e.dataTransfer.setData("text", e.target.id)
+                    console.log(e.target.dataset.name)
+                    whichCard = e.target.dataset.name
+
+                }
+            })
 
 
 
 
+            const targets = document.querySelectorAll(".target")
+            // console.log(targets)
+
+            targets.forEach(target => {
+                // Dragover not supported by default. Turn that off.
+                target.ondragover = e => e.preventDefault()
+
+                target.ondrop = e => {
+                    // Enabled dropping on targets
+                    e.preventDefault()
+
+                    // Determine what's being dropped
+                    const data = e.dataTransfer.getData("text");
+                    // console.log(data)
+                    // Append card to target component as child
+                    let targetDiv = document.getElementById(e.target.id);
+                    // console.log("am i a card", e);
+                    let todoDiv = document.querySelector(".to-do")
+                    if (targetDiv.id === "doing" || targetDiv.id === "done") {
+                        targetDiv.appendChild(document.getElementById(data));
+                        manager.database[whichCard].location = e.target.id
+                        manager.save()
+                    } else if (targetDiv.id === "to-do") {
+                        notie.alert({ type: "warning", text: "Error: You cannot drag items into To Do" })
+                    }
+                }
+            })
+        }
+    },
+})
 module.exports = manager
 

@@ -8,7 +8,8 @@ const DragDropManager = Object.create(null, {
                 // Gain reference of item being dragged
                 stage.ondragstart = e => {
                     e.dataTransfer.setData("text", e.target.id)
-                    console.log(e.target.id)
+                    console.log(e.target.dataset.name)
+                    dragNdDrop.whichCard = e.target.dataset.name
 
                 }
             })
@@ -42,7 +43,7 @@ const DragDropManager = Object.create(null, {
                 }
             })
         }
-    }
+    },
 })
 
 DragDropManager.init()
