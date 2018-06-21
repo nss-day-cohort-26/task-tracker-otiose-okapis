@@ -40,6 +40,14 @@ const DragDropManager = Object.create(null, {
                     if (targetDiv === null){
                         targetDiv.parentNode.appendChild(document.getElementById(data));
                         // console.log(target)
+                    } else if (targetDiv.parentNode.parentNode.id === "doing" || targetDiv.parentNode.parentNode.id === "done" ) {
+                        targetDiv.parentNode.parentNode.appendChild(document.getElementById(data));
+                        let archiveBtn = document.getElementById(data).childNodes
+                            archiveBtn[7].style.visibility = "hidden"
+                        if (targetDiv.parentNode.parentNode.id === "done") {
+                            let archiveBtn = document.getElementById(data).childNodes
+                            archiveBtn[7].style.visibility = "visible";
+                        }
                     }
                     else if (targetDiv.id === "doing" || targetDiv.id === "done") {
                         targetDiv.appendChild(document.getElementById(data));
