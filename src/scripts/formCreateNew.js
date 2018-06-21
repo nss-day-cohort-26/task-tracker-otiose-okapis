@@ -16,6 +16,7 @@ const createNewCategory = (e) => {
         let option = document.createElement("option");
         option.text = newCat.value;
         categoryInput.add(option);
+        newCat.value = "";
         notie.alert({ type: "success", text: "New Category added successfully" })
     }
 }
@@ -99,12 +100,13 @@ const testFormSubmission = (e) => {
         taskModal.style.height = "0%";
         taskModal.style.width = "0%";
         notie.alert({ type: "success", text: "New Task added successfully" })
+        resetForm();
     }
 }
 
 // CLEAR FORM inputs when closed
 const resetForm = () => {
-    const ins = [document.getElementById("nameInput"), document.getElementById("descriptionInput"), document.getElementById("dueDateInput"), document.getElementById("categoryInput")];
+    const ins = [document.getElementById("nameInput"), document.getElementById("descriptionInput"), document.getElementById("dueDateInput")];
 
     ins.forEach(input => {
         input.value = "";
@@ -294,3 +296,4 @@ btn.addEventListener("click", function () {
 taskModal.style.display = "block";
 taskModal.style.height = "0%";
 taskModal.style.width = "0%";
+
