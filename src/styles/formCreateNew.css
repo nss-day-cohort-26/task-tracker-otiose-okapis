@@ -3,7 +3,8 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: all .14s cubic-bezier(0.42, 0, 0.74, 1.62);
+
 
 }
 
@@ -22,7 +23,7 @@
     margin: 4% auto;
     align-self: center;
     border-radius: 10px;
-    transition: all .28s cubic-bezier(0.42, 0, 0.71, 1.88);
+    transition: all .14s cubic-bezier(0.42, 0, 0.74, 1.62);
     overflow: hidden;
 
 }
