@@ -22,7 +22,7 @@
     margin: 4% auto;
     align-self: center;
     border-radius: 10px;
-    transition: all .4s cubic-bezier(0.42, 0, 0.61, 2.14);
+    transition: all .28s cubic-bezier(0.42, 0, 0.71, 1.88);
     overflow: hidden;
 
 }

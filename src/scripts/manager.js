@@ -139,7 +139,7 @@ Object.defineProperty(manager.database, "categories", {
 function timeOutM(taskM) {
     console.log(taskM);
     const taskN = manager.database[`${taskM}`].name;
-    const queryN = taskN.replace(" ", "");
+    const queryN = taskN.split(" ").join("");
     const cardT = document.querySelector(`[data-name2 = ${queryN}]`)
     const overDue = document.createElement("h5");
     overDue.setAttribute("id", "overDue");
