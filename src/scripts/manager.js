@@ -17,7 +17,7 @@ const manager = {
         const cardDiv = document.createElement("div");
         cardDiv.setAttribute("draggable", true)
         cardDiv.setAttribute("id", card.name + card.describe);
-        const name = card.name.replace(" ", "");
+        const name = card.name.split(" ").join("");
         console.log("name test", name);
         cardDiv.setAttribute("data-name", card.name);
         cardDiv.setAttribute("data-name2", name);

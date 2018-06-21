@@ -96,7 +96,9 @@ const testFormSubmission = (e) => {
         manager.createTask(name.value, description.value, dueDate.value, category.value);
         // console.log(manager);
         manager.save();
-        taskModal.style.display = "none";
+        // taskModal.style.display = "none";
+        taskModal.style.height = "0%";
+        taskModal.style.width = "0%";
         notie.alert({ type: "success", text: "New Task added successfully" })
         resetForm();
     }
@@ -167,8 +169,9 @@ const createHeaderDiv = () => {
     closeSpan.textContent = "Close Window";
     // When the user clicks on <span> (x), close the modal
     closeSpan.onclick = function () {
-        taskModal.style.display = "none";
-        // taskModal.style.height = "0px";
+        // taskModal.style.display = "none";
+        taskModal.style.height = "0%";
+        taskModal.style.width = "0%";
         resetForm();
     }
     headerDiv.appendChild(closeSpan);
@@ -285,6 +288,12 @@ document.getElementById("modal-form").appendChild(taskModal);
 const btn = document.getElementById("create-task-button");
 // add event to button that makes modal form appear on click
 btn.addEventListener("click", function () {
-    taskModal.style.display = "block";
+    taskModal.style.height = "100%";
+    taskModal.style.width = "75%";
+
 });
+
+taskModal.style.display = "block";
+taskModal.style.height = "0%";
+taskModal.style.width = "0%";
 
