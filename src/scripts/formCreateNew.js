@@ -288,8 +288,8 @@ document.getElementById("modal-form").appendChild(taskModal);
 const btn = document.getElementById("create-task-button");
 // add event to button that makes modal form appear on click
 btn.addEventListener("click", function () {
-    taskModal.style.height = "100%";
-    taskModal.style.width = "75%";
+    taskModal.style.height = "85%";
+    taskModal.style.width = "45%";
 
 });
 
